@@ -8,6 +8,18 @@ public final class CustomerManager {
 
     private CustomerManager() {
         theCustomers = new HashMap<>();
+
+        Customer bhagy = new Customer();
+        bhagy.addAccount(new Account("Main", 1000.0));
+        theCustomers.put("Bhagy", bhagy);
+
+        Customer christina = new Customer();
+        christina.addAccount(new Account("Savings", 1500.0));
+        theCustomers.put("Christina", christina);
+
+        Customer john = new Customer();
+        john.addAccount(new Account("Checking", 250.0));
+        theCustomers.put("John", john);
     }
 
     public static CustomerManager getInstance() {
