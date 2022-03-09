@@ -11,6 +11,7 @@ public final class CommandManager {
         theCommandMap = new HashMap<>();
 
         // Insert all our commands here.
+        theCommandMap.put("EXAMPLE",        new CommandExample());
         theCommandMap.put("SHOWMYACCOUNTS", new ShowMyAccounts());
     }
 
