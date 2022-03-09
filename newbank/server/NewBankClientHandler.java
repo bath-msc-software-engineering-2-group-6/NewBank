@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class NewBankClientHandler extends Thread{
 	
@@ -35,10 +37,18 @@ public class NewBankClientHandler extends Thread{
 			if(customer != null) {
 				out.println("Log In Successful. What do you want to do?");
 				while(true) {
-					String request = in.readLine();
+					String myRequest = in.readLine();
+					// Split string up by spaces. First word is request keyword, the rest are request arguments.
+					ArrayList<String> mySplitRequest = new ArrayList<>(Arrays.asList(myRequest.split(" ")));
+
+					// Insert customer after the request keyword.
+					mySplitRequest.add(1, customer.getKey());
+
 					System.out.println("Request from " + customer.getKey());
-					String responce = bank.processRequest(customer, request);
-					out.println(responce);
+
+					// Process request.
+					String response = bank.processRequest(customer, mySplitRequest);
+					out.println(response);
 				}
 			}
 			else {
