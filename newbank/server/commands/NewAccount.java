@@ -28,8 +28,7 @@ public class NewAccount implements Command {
                 myResponse = "FAIL";
             } else {
                 myResponse = "SUCCESS";
-                int DEFAULT_OPENING_BALANCE = 0;
-                customer.addAccount(new Account(accountName, DEFAULT_OPENING_BALANCE));
+                customer.addAccount(new Account(accountName, Account.DEFAULT_OPENING_BALANCE));
             }
 
             return new CommandResponse(myResponse);
