@@ -17,4 +17,21 @@ public class Account {
 	public String getAccountName() {
 		return  accountName;
 	}
-}
+
+	public double getBalance() {
+		return openingBalance;
+	}
+
+	public void credit (double credit){
+		openingBalance=openingBalance+credit;
+	}
+
+	public void debit (double debit){
+		if(openingBalance>debit){
+			openingBalance=openingBalance-debit;
+		} else {
+			System.out.println("Insufficient funds.\n");
+		}
+	}
+
+	}
