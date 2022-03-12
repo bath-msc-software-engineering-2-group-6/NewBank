@@ -13,6 +13,7 @@ public final class CommandManager {
         // Insert all our commands here.
         theCommandMap.put("EXAMPLE",        new CommandExample());
         theCommandMap.put("SHOWMYACCOUNTS", new ShowMyAccounts());
+        theCommandMap.put("NEWACCOUNT", new NewAccount());
     }
 
     public static CommandManager getInstance() {
