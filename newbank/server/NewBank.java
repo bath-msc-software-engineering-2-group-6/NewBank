@@ -15,15 +15,18 @@ public class NewBank {
 	private void addTestData() {
 		Customer bhagy = new Customer();
 		bhagy.addAccount(new Account("Main", 1000.0));
+		bhagy.setPassword("password"); //placeholder password
 		customers.put("Bhagy", bhagy);
 		
 		Customer christina = new Customer();
 		christina.addAccount(new Account("Savings", 1500.0));
+		christina.setPassword("password");
 		customers.put("Christina", christina);
 		
 		Customer john = new Customer();
 		john.addAccount(new Account("Checking", 250.0));
 		customers.put("John", john);
+		john.setPassword("password");
 	}
 	
 	public static NewBank getBank() {
@@ -32,10 +35,28 @@ public class NewBank {
 	
 	public synchronized CustomerID checkLogInDetails(String userName, String password) {
 		if(customers.containsKey(userName)) {
+			Customer customer = customers.get(userName);
+			if(customer.getPassword().equals(password))
+
 			return new CustomerID(userName);
 		}
 		return null;
 	}
+
+	//check newly created acccount passwords are valid
+/*
+	public boolean PasswordValidility(String password){
+		int minCharacters = 10;
+		int maxCharacters= 20;
+		int passwordLength = password.length();
+
+		if(passwordLength ≥ minCharacters && passwordLength ≤ maxCharacters){
+			return true;
+		}else{
+			return false;
+
+		}
+	}*/
 
 	// commands from the NewBank customer are processed in this method
 	public synchronized String processRequest(CustomerID customer, String request) {
@@ -47,6 +68,7 @@ public class NewBank {
 		}
 		return "FAIL";
 	}
+
 	
 	private String showMyAccounts(CustomerID customer) {
 		return (customers.get(customer.getKey())).accountsToString();

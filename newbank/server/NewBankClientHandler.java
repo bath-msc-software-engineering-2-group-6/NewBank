@@ -23,10 +23,10 @@ public class NewBankClientHandler extends Thread{
 		// keep getting requests from the client and processing them
 		try {
 			// ask for user name
-			out.println("Enter Username");
+			out.println("Please enter Username");
 			String userName = in.readLine();
 			// ask for password
-			out.println("Enter Password");
+			out.println("Please enter Password");
 			String password = in.readLine();
 			out.println("Checking Details...");
 			// authenticate user and get customer ID token from bank for use in subsequent requests

@@ -5,9 +5,14 @@ import java.util.ArrayList;
 public class Customer {
 	
 	private ArrayList<Account> accounts;
-	
-	public Customer() {
+	private String CustomerID;
+	private String password = "password"; //default test
+
+
+	//add account here too
+	public Customer(){
 		accounts = new ArrayList<>();
+
 	}
 	
 	public String accountsToString() {
@@ -17,6 +22,25 @@ public class Customer {
 		}
 		return s;
 	}
+
+//setter
+	public void setPassword(String Password){
+		this.password =  Password;
+	}
+	//getter
+	public String getPassword(){
+		return this.password;
+	}
+	// check password input. Currently not in use.
+	public Boolean checkPassword(String pInput){
+		if(pInput.equals(password)) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+
 
 	public void addAccount(Account account) {
 		accounts.add(account);		
