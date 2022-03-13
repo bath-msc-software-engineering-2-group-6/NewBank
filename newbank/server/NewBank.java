@@ -4,6 +4,9 @@ import newbank.server.commands.Command;
 import newbank.server.commands.CommandException;
 import newbank.server.commands.CommandManager;
 import newbank.server.commands.CommandResponse;
+import newbank.server.customers.Customer;
+import newbank.server.customers.CustomerID;
+import newbank.server.customers.CustomerManager;
 
 import java.util.ArrayList;
 
