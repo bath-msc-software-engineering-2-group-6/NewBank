@@ -27,12 +27,13 @@ public class MoveMoney implements Command {
 
             String myResponse = "";
 
-            if(!customer.hasAccount(fromAccName) || !customer.hasAccount(toAccName) ) {
+            Account from = customer.findAccount(fromAccName);
+            Account to = customer.findAccount(toAccName);
+
+            if(from == null || to == null ) {
                 myResponse = "FAIL";
             } else {
 
-                Account from = customer.findAccount(fromAccName);
-                Account to = customer.findAccount(toAccName);
 
                 String amountString = argsList.get(1);
                 double amount = Double.parseDouble(amountString);

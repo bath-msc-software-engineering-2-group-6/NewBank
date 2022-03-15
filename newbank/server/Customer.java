@@ -35,11 +35,8 @@ public class Customer {
 
 	public Account findAccount (String name){
 		for (Account account : accounts){
-			if (account.getAccountName() == name){
+			if (account.getAccountName().equals(name)){
 				return account;
-			}
-			else {
-				return null;
 			}
 		}
 		return null;
