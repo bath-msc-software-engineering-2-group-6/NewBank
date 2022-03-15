@@ -14,6 +14,7 @@ public final class CommandManager {
         theCommandMap.put("EXAMPLE",        new CommandExample());
         theCommandMap.put("SHOWMYACCOUNTS", new ShowMyAccounts());
         theCommandMap.put("NEWACCOUNT", new NewAccount());
+        theCommandMap.put("MOVEMONEY", new MoveMoney());
     }
 
     public static CommandManager getInstance() {

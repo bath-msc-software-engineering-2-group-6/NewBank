@@ -32,4 +32,16 @@ public class Customer {
 		Account existingAccount = accounts.stream().filter(account -> account.getAccountName().equals(accountName)).findFirst().orElse(null);
 		return existingAccount != null;
 	}
+
+	public Account findAccount (String name){
+		for (Account account : accounts){
+			if (account.getAccountName() == name){
+				return account;
+			}
+			else {
+				return null;
+			}
+		}
+		return null;
+	}
 }
