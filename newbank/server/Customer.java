@@ -31,15 +31,6 @@ public class Customer {
 	public String getPassword(){
 		return this.password;
 	}
-	// check password input. Currently not in use.
-	public Boolean checkPassword(String pInput){
-		if(pInput.equals(password)) {
-			return true;
-		}else{
-			return false;
-		}
-	}
-
 
 
 	public void addAccount(Account account) {

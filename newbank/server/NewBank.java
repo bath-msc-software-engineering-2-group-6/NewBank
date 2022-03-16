@@ -42,21 +42,7 @@ public class NewBank {
 		}
 		return null;
 	}
-
-	//check newly created acccount passwords are valid
-/*
-	public boolean PasswordValidility(String password){
-		int minCharacters = 10;
-		int maxCharacters= 20;
-		int passwordLength = password.length();
-
-		if(passwordLength ≥ minCharacters && passwordLength ≤ maxCharacters){
-			return true;
-		}else{
-			return false;
-
-		}
-	}*/
+	
 
 	// commands from the NewBank customer are processed in this method
 	public synchronized String processRequest(CustomerID customer, String request) {
