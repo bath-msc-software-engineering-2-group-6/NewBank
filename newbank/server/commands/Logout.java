@@ -19,7 +19,6 @@ public class Logout implements Command {
         } else {
 
             String myResponse = "Logout Successful";
-
             return new CommandResponse(myResponse);
         }
 
