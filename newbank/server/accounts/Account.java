@@ -10,7 +10,7 @@ public class Account {
 		this.accountName = accountName;
 		this.openingBalance = openingBalance;
 	}
-	
+
 	public String toString() {
 		return (accountName + ": " + openingBalance);
 	}
@@ -23,16 +23,15 @@ public class Account {
 		return openingBalance;
 	}
 
-	public void credit (double credit){
-		openingBalance=openingBalance+credit;
+	public void credit (double credit) {
+		openingBalance = openingBalance + credit;
 	}
 
-	public void debit (double debit){
-		if(openingBalance>debit){
+	public void debit (double debit) {
+		if (openingBalance>debit){
 			openingBalance=openingBalance-debit;
 		} else {
 			System.out.println("Insufficient funds.\n");
 		}
 	}
-
-	}
+}
