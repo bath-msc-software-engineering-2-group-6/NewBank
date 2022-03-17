@@ -15,6 +15,7 @@ public class NewBankClientHandler extends Thread{
 	private NewBank bank;
 	private BufferedReader in;
 	private PrintWriter out;
+	public static CustomerID customer;
 	
 	
 	public NewBankClientHandler(Socket s) throws IOException {
@@ -27,7 +28,7 @@ public class NewBankClientHandler extends Thread{
 		// keep getting requests from the client and processing them
 		try {
 			// Run login method to get CustomerID
-			CustomerID customer = login();
+			NewBankClientHandler.customer = login();
 
 			if(customer != null) {
 				out.println("Log In Successful. What do you want to do?");

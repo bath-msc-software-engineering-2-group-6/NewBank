@@ -1,5 +1,9 @@
 package newbank.client;
 
+import newbank.server.NewBankClientHandler;
+import newbank.server.NewBankServer;
+import newbank.server.commands.Logout;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
