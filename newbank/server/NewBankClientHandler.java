@@ -35,7 +35,7 @@ public class NewBankClientHandler extends Thread{
 				if (customer != null) {
 					out.println("Log In Successful. What do you want to do?");
 					loggedIn = true;
-					while (loggedIn == true) {
+					while (loggedIn) {
 						String myRequest = in.readLine();
 						// Split string up by spaces. First word is request keyword, the rest are request arguments.
 						ArrayList<String> mySplitRequest = new ArrayList<>(Arrays.asList(myRequest.split(" ")));
