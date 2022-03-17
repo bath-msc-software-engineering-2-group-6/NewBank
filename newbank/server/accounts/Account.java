@@ -1,4 +1,4 @@
-package newbank.server;
+package newbank.server.accounts;
 
 public class Account {
 	
