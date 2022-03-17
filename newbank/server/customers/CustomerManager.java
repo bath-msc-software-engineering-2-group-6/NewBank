@@ -1,4 +1,6 @@
-package newbank.server;
+package newbank.server.customers;
+
+import newbank.server.Account;
 
 import java.util.HashMap;
 
@@ -34,11 +36,7 @@ public final class CustomerManager {
         // Retrieve the customer.
         Customer myCustomer = theCustomers.get(name);
 
-        if (myCustomer != null) {
-            return true;
-        }
-
-        return false;
+        return myCustomer != null;
     }
 
     public void addCustomer(String name, Customer customer) {
@@ -46,10 +44,6 @@ public final class CustomerManager {
     }
 
     public Customer getCustomer(CustomerID customerID) {
-        if (theCustomers.containsKey(customerID.getKey())) {
-            return theCustomers.get(customerID.getKey());
-        } else {
-            return null;
-        }
+        return theCustomers.getOrDefault(customerID.getKey(), null);
     }
 }

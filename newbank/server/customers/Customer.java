@@ -1,9 +1,11 @@
-package newbank.server;
+package newbank.server.customers;
 
-import java.util.ArrayList;
+import newbank.server.Account;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import java.util.ArrayList;
 
 public class Customer {
 	

@@ -1,7 +1,7 @@
 package newbank.server.commands;
 
-import newbank.server.CustomerID;
-import newbank.server.CustomerManager;
+import newbank.server.customers.CustomerID;
+import newbank.server.customers.CustomerManager;
 
 import java.util.ArrayList;
 

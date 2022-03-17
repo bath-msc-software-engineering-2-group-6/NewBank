@@ -1,9 +1,9 @@
 package newbank.server.commands;
 
 import newbank.server.Account;
-import newbank.server.Customer;
-import newbank.server.CustomerID;
-import newbank.server.CustomerManager;
+import newbank.server.customers.Customer;
+import newbank.server.customers.CustomerID;
+import newbank.server.customers.CustomerManager;
 
 import java.util.ArrayList;
 
@@ -28,8 +28,7 @@ public class NewAccount implements Command {
                 myResponse = "FAIL";
             } else {
                 myResponse = "SUCCESS";
-                int DEFAULT_OPENING_BALANCE = 0;
-                customer.addAccount(new Account(accountName, DEFAULT_OPENING_BALANCE));
+                customer.addAccount(new Account(accountName, Account.DEFAULT_OPENING_BALANCE));
             }
 
             return new CommandResponse(myResponse);
