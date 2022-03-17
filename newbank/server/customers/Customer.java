@@ -1,6 +1,9 @@
 package newbank.server.customers;
 
 import newbank.server.Account;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import java.util.ArrayList;
 
@@ -30,5 +33,14 @@ public class Customer {
 		// find accountName in list of user accounts
 		Account existingAccount = accounts.stream().filter(account -> account.getAccountName().equals(accountName)).findFirst().orElse(null);
 		return existingAccount != null;
+	}
+
+	public Account findAccount (String name){
+		for (Account account : accounts){
+			if (account.getAccountName().equals(name)){
+				return account;
+			}
+		}
+		return null;
 	}
 }
