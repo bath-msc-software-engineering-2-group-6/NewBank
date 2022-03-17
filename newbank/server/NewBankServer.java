@@ -1,5 +1,6 @@
 package newbank.server;
 
+import newbank.server.commands.Logout;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -38,4 +39,5 @@ public class NewBankServer extends Thread{
 		// starts a new NewBankServer thread on a specified port number
 		new NewBankServer(14002).start();
 	}
+
 }
