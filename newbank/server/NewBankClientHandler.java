@@ -26,7 +26,9 @@ public class NewBankClientHandler extends Thread{
 	public void run() {
 		// keep getting requests from the client and processing them
 		try {
+			// Run login method to get CustomerID
 			CustomerID customer = login();
+
 			if(customer != null) {
 				out.println("Log In Successful. What do you want to do?");
 				while(true) {
