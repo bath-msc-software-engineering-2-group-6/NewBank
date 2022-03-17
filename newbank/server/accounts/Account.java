@@ -28,8 +28,8 @@ public class Account {
 	}
 
 	public void debit (double debit) {
-		if (openingBalance>debit){
-			openingBalance=openingBalance-debit;
+		if (openingBalance > debit){
+			openingBalance = openingBalance - debit;
 		} else {
 			System.out.println("Insufficient funds.\n");
 		}
