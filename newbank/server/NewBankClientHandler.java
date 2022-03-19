@@ -1,5 +1,6 @@
 package newbank.server;
 
+import newbank.server.commands.Constants;
 import newbank.server.customers.CustomerID;
 
 import java.io.BufferedReader;
@@ -48,7 +49,7 @@ public class NewBankClientHandler extends Thread{
 						// Process request.
 						String response = bank.processRequest(customer, mySplitRequest);
 						out.println(response);
-						if (response.equals("Logout Successful")) {
+						if (response.equals(Constants.logoutResponse)) {
 							loggedIn = false;
 						}
 					}

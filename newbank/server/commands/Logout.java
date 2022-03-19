@@ -18,7 +18,7 @@ public class Logout implements Command {
             throw new CommandException(myException);
         } else {
 
-            String myResponse = "Logout Successful";
+            String myResponse = Constants.logoutResponse;
             return new CommandResponse(myResponse);
         }
 
