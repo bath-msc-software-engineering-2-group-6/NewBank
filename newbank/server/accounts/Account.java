@@ -16,6 +16,7 @@ public class Account {
 		this.balance = DEFAULT_OPENING_BALANCE;
 	}
 
+	@Override
 	public String toString() {
 		return (accountName + ": " + balance);
 	}
