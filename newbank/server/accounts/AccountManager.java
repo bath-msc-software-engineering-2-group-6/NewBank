@@ -81,6 +81,16 @@ public final class AccountManager {
         return theAccounts.getOrDefault(anAccountId, null);
     }
 
+    public ArrayList<Account> getAccounts(ArrayList<AccountID> anAccountIds) {
+        ArrayList<Account> myAccountList = new ArrayList<>();
+
+        for (AccountID accountId : anAccountIds) {
+            myAccountList.add(getAccount(accountId));
+        }
+
+        return myAccountList;
+    }
+
     /**
      *
      * @param from
