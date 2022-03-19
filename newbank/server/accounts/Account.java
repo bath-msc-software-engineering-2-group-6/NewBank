@@ -1,18 +1,23 @@
 package newbank.server.accounts;
 
 public class Account {
-	
-	private String accountName;
-	private double openingBalance;
-	public static int DEFAULT_OPENING_BALANCE = 0;
+	public static double DEFAULT_OPENING_BALANCE = 0.0;
 
-	public Account(String accountName, double openingBalance) {
-		this.accountName = accountName;
-		this.openingBalance = openingBalance;
+	private final String accountName;
+	private double balance;
+
+	public Account(String anAccountName, double aBalance) {
+		this.accountName = anAccountName;
+		this.balance = aBalance;
+	}
+
+	public Account(String anAccountName) {
+		this.accountName = anAccountName;
+		this.balance = DEFAULT_OPENING_BALANCE;
 	}
 
 	public String toString() {
-		return (accountName + ": " + openingBalance);
+		return (accountName + ": " + balance);
 	}
 
 	public String getAccountName() {
@@ -20,16 +25,16 @@ public class Account {
 	}
 
 	public double getBalance() {
-		return openingBalance;
+		return balance;
 	}
 
 	public void credit (double credit) {
-		openingBalance = openingBalance + credit;
+		balance += credit;
 	}
 
 	public void debit (double debit) {
-		if (openingBalance > debit){
-			openingBalance = openingBalance - debit;
+		if (balance > debit){
+			balance -= debit;
 		} else {
 			System.out.println("Insufficient funds.\n");
 		}
