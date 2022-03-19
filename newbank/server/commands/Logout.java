@@ -1,11 +1,5 @@
 package newbank.server.commands;
 
-import newbank.client.ExampleClient;
-import newbank.server.NewBankClientHandler;
-import newbank.server.NewBankServer;
-import newbank.server.customers.CustomerID;
-
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Logout implements Command {
