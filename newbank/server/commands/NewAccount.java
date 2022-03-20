@@ -1,6 +1,6 @@
 package newbank.server.commands;
 
-import newbank.server.Account;
+import newbank.server.accounts.AccountManager;
 import newbank.server.customers.Customer;
 import newbank.server.customers.CustomerID;
 import newbank.server.customers.CustomerManager;
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class NewAccount implements Command {
 
     private final CustomerManager theCustomerManager = CustomerManager.getInstance();
+    private final AccountManager theAccountManager = AccountManager.getInstance();
 
     public CommandResponse process(ArrayList<String> argsList) throws CommandException {
 
@@ -28,7 +29,7 @@ public class NewAccount implements Command {
                 myResponse = "FAIL";
             } else {
                 myResponse = "SUCCESS";
-                customer.addAccount(new Account(accountName, Account.DEFAULT_OPENING_BALANCE));
+                customer.addAccount(theAccountManager.createAccount(accountName));
             }
 
             return new CommandResponse(myResponse);

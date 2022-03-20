@@ -21,6 +21,7 @@ public class NewBankClientHandler extends Thread{
 	
 	public NewBankClientHandler(Socket s) throws IOException {
 		bank = NewBank.getBank();
+		bank.setUpTestEnvironment();
 		in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 		out = new PrintWriter(s.getOutputStream(), true);
 	}
