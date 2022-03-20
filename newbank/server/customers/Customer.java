@@ -11,9 +11,20 @@ public class Customer {
 	private final AccountManager theAccountManager = AccountManager.getInstance();
 
 	private ArrayList<AccountID> theAccountIds;
+
+	public boolean locked;
 	
 	public Customer() {
+		locked = false;
 		theAccountIds = new ArrayList<>();
+	}
+
+	public void lockCustomer (){
+		locked = true;
+	}
+
+	public boolean checkIfLocked(){
+		return locked;
 	}
 
 	public String accountsToString() {
