@@ -25,7 +25,9 @@ public class NewAccount implements Command {
 
             String myResponse = "";
 
-            if(customer.hasAccount(accountName)) {
+            if (accountName.length()>12){
+                myResponse = "FAIL - Name too long";
+            } else if(customer.hasAccount(accountName)) {
                 myResponse = "FAIL";
             } else {
                 myResponse = "SUCCESS";
