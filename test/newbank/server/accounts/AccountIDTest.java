@@ -1,4 +1,4 @@
-package newbank.server.accounts;
+package test.newbank.server.accounts;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
