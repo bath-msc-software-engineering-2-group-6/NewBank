@@ -42,7 +42,7 @@ public class NewBank {
 		}
 		return null;
 	}
-	
+
 
 	// commands from the NewBank customer are processed in this method
 	public synchronized String processRequest(CustomerID customer, String request) {
