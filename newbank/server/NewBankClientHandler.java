@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class NewBankClientHandler extends Thread{
-
+	
 	private NewBank bank;
 	private BufferedReader in;
 	private PrintWriter out;
