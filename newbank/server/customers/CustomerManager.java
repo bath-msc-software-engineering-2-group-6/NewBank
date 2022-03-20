@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public final class CustomerManager {
     private static CustomerManager theInstance;
-    private HashMap<String, Customer> theCustomers;
+    public HashMap<String, Customer> theCustomers;
 
     private CustomerManager() {
         theCustomers = new HashMap<>();

@@ -35,7 +35,7 @@ public class NewBankClientHandler extends Thread{
 		try {
 			// Run login method to get CustomerID
 			while(true) {
-				this.customer = startUp();
+				startUp();
 
 				if (customer != null) {
 					out.println("Log In Successful. What do you want to do?");
@@ -75,38 +75,66 @@ public class NewBankClientHandler extends Thread{
 		}
 	}
 
-	public CustomerID startUp() throws IOException {
-		boolean startUp = true;
+	public void startUp() throws IOException {
 		try {
-			while (startUp) {
-				out.println("Login or Setup New Customer?");
-				String startUpString = in.readLine();
-				if (startUpString.equals(Constants.startLogin)){
-					startUp = false;
-					break;
-				}
-				if (startUpString.equals(Constants.startSetupNewCustomer)){
-					out.println("Enter Customer Name");
-					String customerName = in.readLine();
-					Customer newCustomer = theCustomerManager.createCustomer(customerName);
+			out.println("Login or Setup New Customer?");
+			String startUpString = in.readLine();
+			if (startUpString.equals(Constants.startLogin)) {
+				this.customer = login();
+			} else if (startUpString.equals(Constants.startSetupNewCustomer)){
+				createCustomerOnStartup();
+			} else {
+				out.println("Type \"LOGIN\" or \"SETUPCUSOMTER\"");
+			}
+		} catch (IOException e){
+			e.printStackTrace();
+		}
+	}
+
+	private void createCustomerOnStartup() throws IOException {
+		boolean creationSuccess = false;
+		try {
+			while (!creationSuccess) {
+				out.println("Enter Customer Name");
+				String customerName = in.readLine();
+				if (checkCustomerExists(customerName)) {
+					out.println("Customer Name Taken, Please Try Another");
 				} else {
-					out.println("Type \"LOGIN\" or \"SETUPCUSOMTER\"");
+					Customer newCustomer = theCustomerManager.createCustomer(customerName);
+					this.customer = bank.checkLogInDetails(customerName, "Password");
+					creationSuccess = true;
 				}
 			}
 		} catch (IOException e){
 			e.printStackTrace();
 		}
-		// ask for user name
-		out.println("Enter Username");
-		String userName = in.readLine();
-		// ask for password
-		out.println("Enter Password");
-		String password = in.readLine();
-		out.println("Checking Details...");
-		// authenticate user and get customer ID token from bank for use in subsequent requests
-		this.customer = bank.checkLogInDetails(userName, password);
-		// if the user is authenticated then get requests from the user and process them
-		return this.customer;
 	}
 
+	private boolean checkCustomerExists(String name) {
+		for (String customer : theCustomerManager.theCustomers.keySet()){
+			if (name.equals(customer)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public CustomerID login() throws IOException {
+		try {
+			// ask for user name
+			out.println("Enter Username");
+			String userName = in.readLine();
+			// ask for password
+			out.println("Enter Password");
+			String password = in.readLine();
+			out.println("Checking Details...");
+			// authenticate user and get customer ID token from bank for use in subsequent requests
+			this.customer = bank.checkLogInDetails(userName, password);
+			// if the user is authenticated then get requests from the user and process them
+			return this.customer;
+		} catch (IOException e){
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
