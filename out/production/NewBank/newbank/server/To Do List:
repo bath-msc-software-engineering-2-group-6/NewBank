@@ -1,0 +1,15 @@
+Done:
+1). Implement Passwords for example clients.
+2). Implement basic security features (min and max password length).
+Note: (2.) is partially done, need account creation feature and some more tinkering.
+
+
+To Do:
+1). Flag incorrect passwords and have the use repeat the password input.
+2). Accept passwords for newly created accounts.
+3). Implement more complex password secutirty, enforce the use of special characters and symbols.
+
+
+Issues:
+1). Entering a wrong username is not flagged thus once such a username is entered the result will always produce a loop of 'null.'
+2).
