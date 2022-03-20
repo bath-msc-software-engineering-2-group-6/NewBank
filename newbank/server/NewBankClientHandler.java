@@ -20,15 +20,20 @@ public class NewBankClientHandler extends Thread{
 	private PrintWriter out;
 	private CustomerID customer;
 	private final CustomerManager theCustomerManager = CustomerManager.getInstance();
-	
-	
+
+	/**
+	 * Instantiates I/O for client handler and gets NewBank object
+	 * @param s - NewBankServer server socket
+	 */
 	public NewBankClientHandler(Socket s) throws IOException {
 		bank = NewBank.getBank();
 		bank.setUpTestEnvironment();
 		in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 		out = new PrintWriter(s.getOutputStream(), true);
 	}
-	
+	/**
+	 * Handles requests from user from startup to commands when logged in
+	 */
 	public void run() {
 		boolean loggedIn = false;
 		// keep getting requests from the client and processing them
@@ -74,7 +79,9 @@ public class NewBankClientHandler extends Thread{
 			}
 		}
 	}
-
+	/**
+	 * Allows the user the choice of logging in or creating a new customer object
+	 */
 	public void startUp() throws IOException {
 		try {
 			out.println("Login or Setup New Customer?");
@@ -90,7 +97,9 @@ public class NewBankClientHandler extends Thread{
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Creates a customer object
+	 */
 	private void createCustomerOnStartup() throws IOException {
 		boolean creationSuccess = false;
 		try {
@@ -109,7 +118,11 @@ public class NewBankClientHandler extends Thread{
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Checks if chosen customer name is already taken
+	 * @param name - the given name
+	 * @return boolean
+	 */
 	private boolean checkCustomerExists(String name) {
 		for (String customer : theCustomerManager.theCustomers.keySet()){
 			if (name.equals(customer)) {
@@ -118,7 +131,10 @@ public class NewBankClientHandler extends Thread{
 		}
 		return false;
 	}
-
+	/**
+	 * Sets customerID to chosen customer from login details
+	 * @return customer object
+	 */
 	public CustomerID login() throws IOException {
 		try {
 			// ask for user name
