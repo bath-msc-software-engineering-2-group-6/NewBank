@@ -1,7 +1,9 @@
 package newbank.server;
 
 import newbank.server.commands.Constants;
+import newbank.server.customers.Customer;
 import newbank.server.customers.CustomerID;
+import newbank.server.customers.CustomerManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,6 +19,7 @@ public class NewBankClientHandler extends Thread{
 	private BufferedReader in;
 	private PrintWriter out;
 	private CustomerID customer;
+	private final CustomerManager theCustomerManager = CustomerManager.getInstance();
 	
 	
 	public NewBankClientHandler(Socket s) throws IOException {
@@ -73,6 +76,26 @@ public class NewBankClientHandler extends Thread{
 	}
 
 	public CustomerID login() throws IOException {
+		boolean startUp = true;
+		try {
+			while (startUp) {
+				out.println("Login or Setup New Customer?");
+				String startUpString = in.readLine();
+				if (startUpString.equals(Constants.startLogin)){
+					startUp = false;
+					break;
+				}
+				if (startUpString.equals(Constants.startSetupNewCustomer)){
+					out.println("Enter Customer Name");
+					String customerName = in.readLine();
+					Customer newCustomer = theCustomerManager.createCustomer(customerName);
+				} else {
+					out.println("Type \"LOGIN\" or \"SETUPCUSOMTER\"");
+				}
+			}
+		} catch (IOException e){
+			e.printStackTrace();
+		}
 		// ask for user name
 		out.println("Enter Username");
 		String userName = in.readLine();
