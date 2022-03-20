@@ -21,7 +21,7 @@ public class Account {
 		String string = " " + accountName;
 		int len = accountName.length();
 		int space = 12 - len;
-		for (int i=0, i<space, i++){
+		for (int i=0; i<space; i++){
 			string+= " ";
 		}
 		String formattedBalance = String.format("%.1f", balance);
