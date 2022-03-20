@@ -35,7 +35,7 @@ public class NewBankClientHandler extends Thread{
 		try {
 			// Run login method to get CustomerID
 			while(true) {
-				this.customer = login();
+				this.customer = startUp();
 
 				if (customer != null) {
 					out.println("Log In Successful. What do you want to do?");
@@ -75,7 +75,7 @@ public class NewBankClientHandler extends Thread{
 		}
 	}
 
-	public CustomerID login() throws IOException {
+	public CustomerID startUp() throws IOException {
 		boolean startUp = true;
 		try {
 			while (startUp) {
