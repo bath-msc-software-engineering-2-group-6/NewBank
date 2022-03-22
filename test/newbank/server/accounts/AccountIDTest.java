@@ -1,4 +1,4 @@
-package test.newbank.server.accounts;
+package newbank.server.accounts;
 
 import newbank.server.accounts.Account;
 import newbank.server.accounts.AccountID;
