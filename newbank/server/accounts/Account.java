@@ -18,7 +18,15 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return (accountName + ": " + balance);
+		String string = " " + accountName;
+		int len = accountName.length();
+		int space = 12 - len;
+		for (int i=0; i<space; i++){
+			string+= " ";
+		}
+		String formattedBalance = String.format("%.1f", balance);
+		string = string + "| " + formattedBalance + "\n";
+		return string;
 	}
 
 	public String getAccountName() {

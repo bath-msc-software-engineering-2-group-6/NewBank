@@ -18,7 +18,7 @@ public class Customer {
 
 	public String accountsToString() {
 		ArrayList<Account> myAccounts = theAccountManager.getAccounts(theAccountIds);
-		String myString = "";
+		String myString = "Account Name | Amount\n-------------|--------\n";
 		for (Account account : myAccounts) {
 			myString += account.toString();
 		}
