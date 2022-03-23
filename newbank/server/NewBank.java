@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class NewBank {
 	
 	private static final NewBank bank = new NewBank();
-	private CustomerManager theCustomerManager = CustomerManager.getInstance();
+	public CustomerManager theCustomerManager = CustomerManager.getInstance();
 	private CommandManager theCommandManager = CommandManager.getInstance();
 	private AccountManager theAccountManager = AccountManager.getInstance();
 	
@@ -23,6 +23,8 @@ public class NewBank {
 	public static NewBank getBank() {
 		return bank;
 	}
+
+	public CustomerManager theCustomerManager() {return theCustomerManager;}
 	
 	public synchronized CustomerID checkLogInDetails(String userName, String password) {
 		if(theCustomerManager.validateLogin(userName, password)) {
