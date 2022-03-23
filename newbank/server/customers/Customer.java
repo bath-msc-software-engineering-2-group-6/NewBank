@@ -26,6 +26,10 @@ public class Customer {
 		locked = true;
 	}
 
+	public void unlockCustomer (){
+		locked = false;
+	}
+
 	public boolean checkIfLocked(){
 		return locked;
 	}

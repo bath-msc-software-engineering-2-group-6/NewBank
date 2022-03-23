@@ -36,6 +36,26 @@ public final class CustomerManager {
         return myCustomer;
     }
 
+    public void lockCustomer(String name){
+        //lock customer
+        Customer myCustomer = theCustomers.get(name);
+        myCustomer.lockCustomer();
+    }
+
+    public void unlockCustomer(String name){
+        //unlock customer
+        Customer myCustomer = theCustomers.get(name);
+        myCustomer.unlockCustomer();
+    }
+
+    public boolean checkCustomerLock(String name){
+        //check if customer is locked
+        Customer myCustomer = theCustomers.get(name);
+        boolean check = myCustomer.checkIfLocked();
+        return check;
+    }
+
+
     public void addCustomer(String name, Customer customer) {
         theCustomers.put(name, customer);
     }
