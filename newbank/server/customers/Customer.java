@@ -11,7 +11,9 @@ public class Customer {
 	private final AccountManager theAccountManager = AccountManager.getInstance();
 
 	private ArrayList<AccountID> theAccountIds;
-	
+	private String CustomerID;
+	private String password = "password";
+
 	public Customer() {
 		theAccountIds = new ArrayList<>();
 	}
@@ -23,6 +25,14 @@ public class Customer {
 			myString += account.toString();
 		}
 		return myString;
+	}
+
+	public void setPassword(String Password){
+		this.password =  Password;
+	}
+
+	public String getPassword(){
+		return this.password;
 	}
 
 	public void addAccount(AccountID anAccountId) {
