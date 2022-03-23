@@ -25,6 +25,25 @@ public final class CustomerManager {
         return myCustomer != null;
     }
 
+    public void lockCustomer(String name){
+        //lock customer
+        Customer myCustomer = theCustomers.get(name);
+        myCustomer.lockCustomer();
+    }
+
+    public void unlockCustomer(String name){
+        //unlock customer
+        Customer myCustomer = theCustomers.get(name);
+        myCustomer.unlockCustomer();
+    }
+
+    public boolean checkCustomerLock(String name){
+        //check if customer is locked
+        Customer myCustomer = theCustomers.get(name);
+        boolean check = myCustomer.checkIfLocked();
+        return check;
+    }
+
     public Customer createCustomer(String name) {
         Customer myCustomer = new Customer();
         theCustomers.put(name, myCustomer);
