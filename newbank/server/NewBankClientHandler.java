@@ -110,7 +110,7 @@ public class NewBankClientHandler extends Thread{
 					out.println("Customer Name Taken, Please Try Another");
 				} else {
 					Customer newCustomer = theCustomerManager.createCustomer(customerName);
-					this.customer = bank.checkLogInDetails(customerName, "Password");
+					this.customer = bank.checkLogInDetails(customerName, "password");
 					creationSuccess = true;
 				}
 			}
