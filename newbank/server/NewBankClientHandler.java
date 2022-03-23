@@ -60,6 +60,7 @@ public class NewBankClientHandler extends Thread{
 						out.println(response);
 						if (response.equals(Constants.logoutResponse)) {
 							loggedIn = false;
+							this.customer = null;
 						}
 					}
 				} else {
