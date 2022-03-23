@@ -39,8 +39,6 @@ public class Customer {
 		return existingAccount != null;
 	}
 
-
-
 	public Account findAccount (String accountName) {
 		return theAccountManager.findAccount(theAccountIds, accountName);
 	}
