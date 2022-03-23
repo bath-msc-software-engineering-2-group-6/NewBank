@@ -68,11 +68,14 @@ public class NewBank {
 	public void setUpTestEnvironment() {
 		Customer bhagy = theCustomerManager.createCustomer("Bhagy");
 		bhagy.addAccount(theAccountManager.createAccount("Main", 1000.0));
+		bhagy.setPassword("password");
 
 		Customer christina = theCustomerManager.createCustomer("Christina");
 		christina.addAccount(theAccountManager.createAccount("Savings", 1500.0));
+		christina.setPassword(("password"));
 
 		Customer john = theCustomerManager.createCustomer("John");
 		john.addAccount(theAccountManager.createAccount("Checking", 250.0));
+		john.setPassword(("password"));
 	}
 }

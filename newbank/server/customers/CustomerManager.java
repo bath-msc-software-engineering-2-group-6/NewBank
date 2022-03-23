@@ -21,8 +21,10 @@ public final class CustomerManager {
     public boolean validateLogin(String name, String password) {
         // Retrieve the customer.
         Customer myCustomer = theCustomers.get(name);
-
-        return myCustomer != null;
+        if(myCustomer.getPassword().equals(password)) {
+            return true;
+        }
+        return false;
     }
 
     public Customer createCustomer(String name) {
