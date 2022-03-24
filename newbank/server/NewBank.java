@@ -1,5 +1,6 @@
 package newbank.server;
 
+import newbank.server.accounts.AccountManager;
 import newbank.server.commands.Command;
 import newbank.server.commands.CommandException;
 import newbank.server.commands.CommandManager;
@@ -15,6 +16,7 @@ public class NewBank {
 	private static final NewBank bank = new NewBank();
 	private CustomerManager theCustomerManager = CustomerManager.getInstance();
 	private CommandManager theCommandManager = CommandManager.getInstance();
+	private AccountManager theAccountManager = AccountManager.getInstance();
 	
 	private NewBank() { }
 
@@ -61,5 +63,19 @@ public class NewBank {
 		myResponse = myCommandResponse.getResponse();
 
 		return myResponse;
+	}
+
+	public void setUpTestEnvironment() {
+		Customer bhagy = theCustomerManager.createCustomer("Bhagy");
+		bhagy.addAccount(theAccountManager.createAccount("Main", 1000.0));
+		bhagy.setPassword("password");
+
+		Customer christina = theCustomerManager.createCustomer("Christina");
+		christina.addAccount(theAccountManager.createAccount("Savings", 1500.0));
+		christina.setPassword(("password"));
+
+		Customer john = theCustomerManager.createCustomer("John");
+		john.addAccount(theAccountManager.createAccount("Checking", 250.0));
+		john.setPassword(("password"));
 	}
 }

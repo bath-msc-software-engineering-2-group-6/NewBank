@@ -1,27 +1,13 @@
 package newbank.server.customers;
 
-import newbank.server.Account;
-
 import java.util.HashMap;
 
 public final class CustomerManager {
     private static CustomerManager theInstance;
-    private HashMap<String, Customer> theCustomers;
+    public HashMap<String, Customer> theCustomers;
 
     private CustomerManager() {
         theCustomers = new HashMap<>();
-
-        Customer bhagy = new Customer();
-        bhagy.addAccount(new Account("Main", 1000.0));
-        theCustomers.put("Bhagy", bhagy);
-
-        Customer christina = new Customer();
-        christina.addAccount(new Account("Savings", 1500.0));
-        theCustomers.put("Christina", christina);
-
-        Customer john = new Customer();
-        john.addAccount(new Account("Checking", 250.0));
-        theCustomers.put("John", john);
     }
 
     public static CustomerManager getInstance() {
@@ -35,8 +21,17 @@ public final class CustomerManager {
     public boolean validateLogin(String name, String password) {
         // Retrieve the customer.
         Customer myCustomer = theCustomers.get(name);
+        if(myCustomer.getPassword().equals(password)) {
+            return true;
+        }
+        return false;
+    }
 
-        return myCustomer != null;
+    public Customer createCustomer(String name) {
+        Customer myCustomer = new Customer();
+        theCustomers.put(name, myCustomer);
+
+        return myCustomer;
     }
 
     public void addCustomer(String name, Customer customer) {
