@@ -169,6 +169,7 @@ public class NewBankClientHandler extends Thread{
 			out.println("Unable to log in, customer locked.");
 			return null;
 		}
+		return null;
 	}
 
 }
