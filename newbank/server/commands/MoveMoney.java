@@ -34,17 +34,21 @@ public class MoveMoney implements Command {
                 myResponse = "FAIL";
             } else {
 
+                try {
+                    String amountString = argsList.get(1);
+                    double amount = Double.parseDouble(amountString);
 
-                String amountString = argsList.get(1);
-                double amount = Double.parseDouble(amountString);
-
-                if(from.getBalance() < amount){
-                    myResponse = "INSUFFICIENT FUNDS.";
-                } else {
-                    from.debit(amount);
-                    to.credit(amount);
-                    myResponse = "SUCCESS";
+                    if(from.getBalance() < amount){
+                        myResponse = "INSUFFICIENT FUNDS.";
+                    } else {
+                        from.debit(amount);
+                        to.credit(amount);
+                        myResponse = "SUCCESS";
+                    }
+                } catch (Exception e) {
+                    myResponse = "FAIL";
                 }
+
             }
             return new CommandResponse(myResponse);
         }
