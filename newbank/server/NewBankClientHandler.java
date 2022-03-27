@@ -77,8 +77,8 @@ public class NewBankClientHandler extends Thread{
 		out.println("Enter Username");
 		String userName = in.readLine();
 		// we are going to let users try 3 times
-		for (int i = 1, i < 6, i++){
-			int remaining = 5;
+		int remaining = 5;
+		for (int i = 1; i < 6; i++){
 			// ask for password
 			out.println("Enter Password");
 			String password = in.readLine();
