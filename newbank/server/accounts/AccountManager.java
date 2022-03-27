@@ -33,8 +33,9 @@ public final class AccountManager {
      * @return the account id associated with the account
      */
     public AccountID createAccount(String anAccountName, double aBalance) {
-        Account myAccount = new Account(anAccountName, aBalance);
-        AccountID myAccountId = new AccountID(myAccount);
+        // Generate an account id.
+        AccountID myAccountId = new AccountID();
+        Account myAccount = new Account(myAccountId, anAccountName, aBalance);
 
         theAccounts.put(myAccountId, myAccount);
 
@@ -47,8 +48,9 @@ public final class AccountManager {
      * @return the account id associated with the account
      */
     public AccountID createAccount(String anAccountName) {
-        Account myAccount = new Account(anAccountName);
-        AccountID myAccountId = new AccountID(myAccount);
+        // Generate an account id.
+        AccountID myAccountId = new AccountID();
+        Account myAccount = new Account(myAccountId, anAccountName);
 
         theAccounts.put(myAccountId, myAccount);
 

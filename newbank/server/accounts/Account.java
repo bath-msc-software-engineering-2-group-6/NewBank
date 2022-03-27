@@ -3,15 +3,18 @@ package newbank.server.accounts;
 public class Account {
 	public static double DEFAULT_OPENING_BALANCE = 0.0;
 
+	private final AccountID theAccountId;
 	private final String accountName;
 	private double balance;
 
-	public Account(String anAccountName, double aBalance) {
+	public Account(AccountID anAccountId, String anAccountName, double aBalance) {
+		this.theAccountId = anAccountId;
 		this.accountName = anAccountName;
 		this.balance = aBalance;
 	}
 
-	public Account(String anAccountName) {
+	public Account(AccountID anAccountId, String anAccountName) {
+		this.theAccountId = anAccountId;
 		this.accountName = anAccountName;
 		this.balance = DEFAULT_OPENING_BALANCE;
 	}
@@ -27,6 +30,10 @@ public class Account {
 		String formattedBalance = String.format("%.1f", balance);
 		string = string + "| " + formattedBalance + "\n";
 		return string;
+	}
+
+	public AccountID getAccountId() {
+		return theAccountId;
 	}
 
 	public String getAccountName() {
