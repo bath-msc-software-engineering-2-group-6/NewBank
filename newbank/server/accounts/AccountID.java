@@ -1,12 +1,15 @@
 package newbank.server.accounts;
 
+
+import java.util.Random;
+
 public class AccountID {
     private final String theAccountID;
 
-    public AccountID(Account anAccount) {
-        // Use hash code of account to generate bank acount number.
-        int myHashCode = anAccount.hashCode();
-        theAccountID = String.format("NR%012d", myHashCode);
+    public AccountID() {
+        Random myRandom = new Random();
+        int myAccountId = myRandom.nextInt(10000) + 1;
+        theAccountID = String.format("NR%012d", myAccountId);
     }
 
     public String getAccountID() {
