@@ -77,8 +77,7 @@ public class NewBankClientHandler extends Thread{
 		out.println("Enter Username");
 		String userName = in.readLine();
 		// we are going to let users try 3 times
-		int remaining = 5;
-		for (int i = 1; i < 6; i++){
+		for (int i = 5; i >= 0; i--){
 			// ask for password
 			out.println("Enter Password");
 			String password = in.readLine();
@@ -88,10 +87,9 @@ public class NewBankClientHandler extends Thread{
 			// if the user is authenticated then get requests from the user and process them
 			if (this.customer != null){
 				return this.customer;
-			} else if (remaining != 0){
+			} else if (i!= 0){
 				out.println("Password incorrect!");
-				remaining--;
-				out.println("You can try again " + remaining + " times.");
+				out.println("You can try again " + (i-1) + " times.");
 			} else {
 				out.println("Account locked.");
 				return null;
