@@ -76,24 +76,31 @@ public class NewBankClientHandler extends Thread{
 		// ask for user name
 		out.println("Enter Username");
 		String userName = in.readLine();
+		//checking if the customer's accounts are locked
+		if (!bank.theCustomerManager.checkCustomerLock(userName)){
 		// we are going to let users try 3 times
-		for (int i = 5; i >= 0; i--){
-			// ask for password
-			out.println("Enter Password");
-			String password = in.readLine();
-			out.println("Checking Details...");
-			// authenticate user and get customer ID token from bank for use in subsequent requests
-			this.customer = bank.checkLogInDetails(userName, password);
-			// if the user is authenticated then get requests from the user and process them
-			if (this.customer != null){
-				return this.customer;
-			} else if (i!= 0){
-				out.println("Password incorrect!");
-				out.println("You can try again " + (i-1) + " times.");
-			} else {
-				out.println("Account locked.");
-				return null;
+			for (int i = 5; i >= 0; i--){
+				// ask for password
+				out.println("Enter Password");
+				String password = in.readLine();
+				out.println("Checking Details...");
+				// authenticate user and get customer ID token from bank for use in subsequent requests
+				this.customer = bank.checkLogInDetails(userName, password);
+				// if the user is authenticated then get requests from the user and process them
+				if (this.customer != null){
+					return this.customer;
+				} else if (i!= 0){
+					out.println("Password incorrect!");
+					out.println("You can try again " + (i-1) + " times.");
+				} else {
+					out.println("Customer locked.");
+					bank.theCustomerManager.lockCustomer(userName);
+					return null;
+				}
 			}
+		} else {
+			out.println("Customer locked. Unable to log in.");
+			return null;
 		}
 	}
 
