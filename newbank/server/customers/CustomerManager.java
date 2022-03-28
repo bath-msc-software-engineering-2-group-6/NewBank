@@ -28,7 +28,7 @@ public final class CustomerManager {
     }
 
     public Customer createCustomer(String name) {
-        Customer myCustomer = new Customer();
+        Customer myCustomer = new Customer(new CustomerID(name));
         theCustomers.put(name, myCustomer);
 
         return myCustomer;
