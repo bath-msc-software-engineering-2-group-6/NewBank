@@ -1,11 +1,15 @@
 package newbank.server.loans;
 
+import newbank.server.accounts.Account;
 import newbank.server.accounts.AccountID;
 import newbank.server.accounts.AccountManager;
 import newbank.server.customers.Customer;
+import newbank.server.customers.CustomerID;
+import newbank.server.customers.CustomerManager;
 
 public class Loan {
 
+    private final CustomerManager theCustomerManager = CustomerManager.getInstance();
     private final AccountManager theAccountManager = AccountManager.getInstance();
 
     private final AccountID theHolder;
@@ -35,7 +39,13 @@ public class Loan {
      * @return
      */
     public Customer getHolder() {
-        return null;
+        // Retrieve account via account id.
+        Account myHolderAccount = theAccountManager.getAccount(theHolder);
+
+        // Retrieve customer id via account.
+        CustomerID myCustomerId = myHolderAccount.getCustomerId();
+
+        return theCustomerManager.getCustomer(myCustomerId);
     }
 
     /**
@@ -43,7 +53,13 @@ public class Loan {
      * @return
      */
     public Customer getRecipient() {
-        return null;
+        // Retrieve account via account id.
+        Account myHolderAccount = theAccountManager.getAccount(theRecipient);
+
+        // Retrieve customer id via account.
+        CustomerID myCustomerId = myHolderAccount.getCustomerId();
+
+        return theCustomerManager.getCustomer(myCustomerId);
     }
 
     /**
@@ -77,7 +93,7 @@ public class Loan {
      * @return
      */
     public boolean repay(double anAmount) {
-        return false;
+        return theAccountManager.transferMoney(theRecipient, theHolder, anAmount);
     }
 
 }
