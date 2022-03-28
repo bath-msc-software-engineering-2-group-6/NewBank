@@ -94,12 +94,27 @@ public final class AccountManager {
     }
 
     /**
-     *
-     * @param from
-     * @param to
-     * @return
+     * Transfers money between two accounts.
+     * @param aFromAccountId - the account id to transfer money from
+     * @param aToAccountId - the account id to transfer money to
+     * @param anAmount - the amount of money to transfer
+     * @return true if the transfer is successful, otherwise false
      */
-    public boolean transferMoney(AccountID from, AccountID to) {
-        return true;
+    public boolean transferMoney(AccountID aFromAccountId, AccountID aToAccountId, double anAmount) {
+        // Retrieve accounts by AccountID.
+        Account myFromAccount = getAccount(aFromAccountId);
+        Account myToAccount = getAccount(aToAccountId);
+
+        if (myFromAccount != null && myToAccount != null) {
+            // Verify the from account has a large enough balance.
+            if (myFromAccount.getBalance() >= anAmount) {
+                myFromAccount.debit(anAmount);
+                myToAccount.credit(anAmount);
+
+                return true;
+            }
+        }
+
+        return false;
     }
 }
