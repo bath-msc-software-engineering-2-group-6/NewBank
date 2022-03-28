@@ -89,7 +89,7 @@ public class Loan {
 
     /**
      * Repays the loan with a given amount.
-     * @param anAmount
+     * @param anAmount - the given amount
      * @return true if successful, otherwise false
      */
     public boolean repay(double anAmount) {
