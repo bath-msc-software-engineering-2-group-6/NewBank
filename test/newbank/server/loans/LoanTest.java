@@ -27,8 +27,8 @@ class LoanTest {
         theHolder = theCustomerManager.createCustomer("Holder");
         theRecipient = theCustomerManager.createCustomer("Recipient");
 
-        theHolder.addAccount(theAccountManager.createAccount("Main", 100000));
-        theRecipient.addAccount(theAccountManager.createAccount("Main", 0));
+        theHolder.addAccount(theAccountManager.createAccount(theHolder.getCustomerId(), "Main", 100000));
+        theRecipient.addAccount(theAccountManager.createAccount(theRecipient.getCustomerId(), "Main", 0));
 
     }
 
