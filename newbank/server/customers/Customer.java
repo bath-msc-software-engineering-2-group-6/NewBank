@@ -11,11 +11,12 @@ public class Customer {
 	private final AccountManager theAccountManager = AccountManager.getInstance();
 
 	private ArrayList<AccountID> theAccountIds;
-	private String CustomerID;
+	private final CustomerID theCustomerId;
 	private String password = "password";
 
-	public Customer() {
+	public Customer(CustomerID aCustomerId) {
 		theAccountIds = new ArrayList<>();
+		theCustomerId = aCustomerId;
 	}
 
 	public String accountsToString() {
@@ -33,6 +34,10 @@ public class Customer {
 
 	public String getPassword(){
 		return this.password;
+	}
+
+	public CustomerID getCustomerId() {
+		return theCustomerId;
 	}
 
 	public void addAccount(AccountID anAccountId) {
