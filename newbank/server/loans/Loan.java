@@ -18,11 +18,11 @@ public class Loan {
     private double theBalance;
 
     /**
-     *
-     * @param aHolder
-     * @param aRecipient
-     * @param anInterestRate
-     * @param aBalance
+     * Class which represents a loan between a holder and a recipient.
+     * @param aHolder - the holder of the loan
+     * @param aRecipient - the recipient of the loan
+     * @param anInterestRate - the interest rate of the loan
+     * @param aBalance - the balance of the loan
      */
     public Loan(AccountID aHolder, AccountID aRecipient, double anInterestRate, double aBalance) {
 
@@ -35,8 +35,8 @@ public class Loan {
     }
 
     /**
-     *
-     * @return
+     * Retrieves the holder as a Customer.
+     * @return the holder as a Customer
      */
     public Customer getHolder() {
         // Retrieve account via account id.
@@ -49,8 +49,8 @@ public class Loan {
     }
 
     /**
-     *
-     * @return
+     * Retrieves the recipient as a Customer.
+     * @return the recipient as a Customer.
      */
     public Customer getRecipient() {
         // Retrieve account via account id.
@@ -63,34 +63,34 @@ public class Loan {
     }
 
     /**
-     *
-     * @return
+     * Getter for balance.
+     * @return the balance
      */
     public double getBalance() {
         return theBalance;
     }
 
     /**
-     *
-     * @return
+     * Getter for interest rate.
+     * @return the interest rate.
      */
     public double getInterestRate() {
         return theInterestRate;
     }
 
     /**
-     *
-     * @param anAmount
-     * @return
+     * Credits the account with a given amount.
+     * @param anAmount - the given amount
+     * @return true if successful, otherwise false
      */
     public boolean credit(double anAmount) {
         return theAccountManager.transferMoney(theHolder, theRecipient, anAmount);
     }
 
     /**
-     *
+     * Repays the loan with a given amount.
      * @param anAmount
-     * @return
+     * @return true if successful, otherwise false
      */
     public boolean repay(double anAmount) {
         return theAccountManager.transferMoney(theRecipient, theHolder, anAmount);
