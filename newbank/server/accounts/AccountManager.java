@@ -1,5 +1,7 @@
 package newbank.server.accounts;
 
+import newbank.server.customers.CustomerID;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -32,10 +34,10 @@ public final class AccountManager {
      * @param aBalance - the given balance
      * @return the account id associated with the account
      */
-    public AccountID createAccount(String anAccountName, double aBalance) {
+    public AccountID createAccount(CustomerID aCustomerId, String anAccountName, double aBalance) {
         // Generate an account id.
         AccountID myAccountId = new AccountID();
-        Account myAccount = new Account(myAccountId, anAccountName, aBalance);
+        Account myAccount = new Account(aCustomerId, myAccountId, anAccountName, aBalance);
 
         theAccounts.put(myAccountId, myAccount);
 
@@ -47,10 +49,10 @@ public final class AccountManager {
      * @param anAccountName - the given name
      * @return the account id associated with the account
      */
-    public AccountID createAccount(String anAccountName) {
+    public AccountID createAccount(CustomerID aCustomerId, String anAccountName) {
         // Generate an account id.
         AccountID myAccountId = new AccountID();
-        Account myAccount = new Account(myAccountId, anAccountName);
+        Account myAccount = new Account(aCustomerId, myAccountId, anAccountName);
 
         theAccounts.put(myAccountId, myAccount);
 
