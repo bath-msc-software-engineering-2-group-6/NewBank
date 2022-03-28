@@ -1,9 +1,12 @@
 package newbank.server.loans;
 
 import newbank.server.accounts.AccountID;
+import newbank.server.accounts.AccountManager;
 import newbank.server.customers.Customer;
 
 public class Loan {
+
+    private final AccountManager theAccountManager = AccountManager.getInstance();
 
     private final AccountID theHolder;
     private final AccountID theRecipient;
@@ -23,6 +26,8 @@ public class Loan {
         this.theRecipient = aRecipient;
         this.theInterestRate = anInterestRate;
         this.theBalance = aBalance;
+
+        credit(aBalance);
     }
 
     /**
@@ -63,7 +68,7 @@ public class Loan {
      * @return
      */
     public boolean credit(double anAmount) {
-        return false;
+        return theAccountManager.transferMoney(theHolder, theRecipient, anAmount);
     }
 
     /**
