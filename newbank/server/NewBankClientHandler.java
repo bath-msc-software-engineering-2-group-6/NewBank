@@ -107,11 +107,13 @@ public class NewBankClientHandler extends Thread{
 			while (!creationSuccess) {
 				out.println("Enter Customer Name");
 				String customerName = in.readLine();
+				out.println("Enter New Password");
+				String customerPassword = in.readLine();
 				if (checkCustomerExists(customerName)) {
 					out.println("Customer Name Taken, Please Try Another");
 				} else {
-					Customer newCustomer = theCustomerManager.createCustomer(customerName);
-					this.customer = bank.checkLogInDetails(customerName, "password");
+					Customer newCustomer = theCustomerManager.createCustomer(customerName, customerPassword);
+					this.customer = bank.checkLogInDetails(customerName, customerPassword);
 					creationSuccess = true;
 				}
 			}

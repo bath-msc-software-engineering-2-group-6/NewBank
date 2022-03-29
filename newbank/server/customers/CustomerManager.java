@@ -27,9 +27,11 @@ public final class CustomerManager {
         return false;
     }
 
-    public Customer createCustomer(String name) {
+    public Customer createCustomer(String name, String password) {
         Customer myCustomer = new Customer(new CustomerID(name));
         theCustomers.put(name, myCustomer);
+        theCustomers.get(name).setPassword(password);
+
 
         return myCustomer;
     }
