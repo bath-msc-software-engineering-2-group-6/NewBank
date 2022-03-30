@@ -1,7 +1,6 @@
 package newbank.server.commands;
 
 import newbank.server.authentication.Authenticator;
-import newbank.server.customers.Customer;
 import newbank.server.customers.CustomerID;
 import newbank.server.customers.CustomerManager;
 
@@ -29,6 +28,6 @@ public class SetupAuthenticator implements Command {
     };
 
     public CommandResponse usage() {
-        return new CommandResponse("");
+        return new CommandResponse("Type \"2FA\" to setup 2-Factor-Authentication");
     }
 }
