@@ -2,7 +2,6 @@ package newbank.server.authentication;
 
 import de.taimos.totp.TOTP;
 import newbank.server.customers.CustomerID;
-import newbank.server.customers.CustomerManager;
 import org.apache.commons.codec.binary.Base32;
 import org.apache.commons.codec.binary.Hex;
 import java.security.SecureRandom;
