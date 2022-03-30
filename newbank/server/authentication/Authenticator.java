@@ -23,7 +23,7 @@ public class Authenticator {
         return theInstance;
     }
 
-    public static String generateSecretKey() {
+    public String generateSecretKey() {
         SecureRandom random = new SecureRandom();
         byte[] bytes = new byte[20];
         random.nextBytes(bytes);
@@ -38,11 +38,10 @@ public class Authenticator {
         return TOTP.getOTP(hexKey);
     }
 
-    public static void main(String args[]){
-        String secretKey = "KAPDQD3TPYRYNJYEGQA3RPZQ6RXM6JMN";
+    public void runAuthentication(String key){
         String lastCode = null;
         while (true) {
-            String code = getTOTPCode(secretKey);
+            String code = getTOTPCode(key);
             if (!code.equals(lastCode)) {
                 System.out.println(code);
             }
