@@ -15,7 +15,7 @@ public class MoveMoney implements Command {
 
     public CommandResponse process(ArrayList<String> argsList) throws CommandException {
 
-        if (argsList.size() != 4 && argsList.size() != 5) {
+        if (argsList.size() != 4) {
             String myException = "Invalid arguments, argsList contains: ";
             myException = myException.concat(argsList.toString());
             throw new CommandException(myException);
