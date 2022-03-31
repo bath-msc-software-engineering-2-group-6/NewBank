@@ -17,7 +17,7 @@ public class SetupAuthenticator implements Command {
             throw new CommandException(myException);
         } else {
             String myResponse = "";
-            CustomerID customerID = theCustomerManager.getCustomer(new CustomerID(anArgsList.get(0))).getCustomerId();
+            CustomerID customerID = new CustomerID(anArgsList.get(0));
             String secretKey = theAuthenticator.generateSecretKey();
             theAuthenticator.addAuthentication(customerID, secretKey);
             myResponse = "Your key is " + secretKey;
