@@ -145,7 +145,7 @@ public class NewBankClientHandler extends Thread{
 		//checking if the customer's accounts are locked
 		if (!bank.theCustomerManager.checkCustomerLock(userName)){
 		// we are going to let users try 5 times
-			for (int i = 5; i > 1; i--){
+			for (int i = 5; i > 0; i--){
 				// ask for password
 				out.println("Enter Password");
 				String password = in.readLine();
@@ -155,11 +155,11 @@ public class NewBankClientHandler extends Thread{
 				// if the user is authenticated then get requests from the user and process them
 				if (this.customer != null){
 					return this.customer;
-				} else if (i>2){
+				} else if (i>1){
 					out.println("Password incorrect!");
 					out.println("You can try again " + (i-1) + " times.");
 				} else {
-					out.println("Customer locked.");
+					out.println("Password incorrect! Customer locked.");
 					bank.theCustomerManager.lockCustomer(userName);
 					return null;
 				}
