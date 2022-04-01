@@ -17,6 +17,7 @@ public final class CommandManager {
         theCommandMap.put("MOVEMONEY", new MoveMoney());
         theCommandMap.put("LOGOUT", new Logout());
         theCommandMap.put("2FA", new SetupAuthenticator());
+        theCommandMap.put("SENDMONEY", new SendMoney());
     }
 
     public static CommandManager getInstance() {
