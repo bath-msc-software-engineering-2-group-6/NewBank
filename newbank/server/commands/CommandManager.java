@@ -18,6 +18,8 @@ public final class CommandManager {
         theCommandMap.put("LOGOUT", new Logout());
         theCommandMap.put("2FA", new SetupAuthenticator());
         theCommandMap.put("SENDMONEY", new SendMoney());
+        theCommandMap.put("WITHDRAW", new Withdraw());
+        theCommandMap.put("PAYIN", new PayIn());
     }
 
     public static CommandManager getInstance() {
