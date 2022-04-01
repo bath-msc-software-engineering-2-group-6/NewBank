@@ -166,7 +166,20 @@ public class NewBankClientHandler extends Thread{
 					}
 				}
 			} else {
-				out.println("Customer locked. Unable to log in.");
+				out.println("Customer locked. Enter masterkey to unlock.");
+				try {
+					String keyString = in.readLine();
+					int key = Integer.parseInt(keyString);
+					if (bank.theCustomerManager.unlockCustomer(userName, key)){
+						out.println("Success! Customer unlocked!");
+					} else {
+						out.println("Incorrect key.");
+					}
+				} catch (Exception ex){
+					out.println("Incorrect input.");
+					return null;
+				}
+
 				return null;
 			}
 			return null;
@@ -175,5 +188,7 @@ public class NewBankClientHandler extends Thread{
 			return null;
 		}
 	}
+
+
 
 }
