@@ -79,5 +79,10 @@ public class NewBank {
 		Customer john = theCustomerManager.createCustomer("John", "password");
 		john.addAccount(theAccountManager.createAccount(john.getCustomerId(),"Checking", 250.0));
 		john.setPassword(("password"));
+
+		Customer newbankUKPLC = theCustomerManager.createCustomer("NewBankUKPLC", "admin");
+		newbankUKPLC.addAccount(theAccountManager.createAccount(newbankUKPLC.getCustomerId(),"ATM", -80000.0));
+		newbankUKPLC.setPassword(("admin"));
+
 	}
 }
