@@ -5,6 +5,7 @@ import java.util.HashMap;
 public final class CustomerManager {
     private static CustomerManager theInstance;
     public HashMap<String, Customer> theCustomers;
+    private final int masterKey = 240322;
 
     private CustomerManager() {
         theCustomers = new HashMap<>();
@@ -35,6 +36,30 @@ public final class CustomerManager {
 
         return myCustomer;
     }
+
+    public void lockCustomer(String name){
+        //lock customer
+        Customer myCustomer = theCustomers.get(name);
+        myCustomer.lockCustomer();
+    }
+
+    public boolean unlockCustomer(String name, int key){
+        //unlock customer
+        Customer myCustomer = theCustomers.get(name);
+        if (key == masterKey){
+            myCustomer.unlockCustomer();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkCustomerLock(String name){
+        //check if customer is locked
+        Customer myCustomer = theCustomers.get(name);
+        boolean check = myCustomer.checkIfLocked();
+        return check;
+    }
+
 
     public void addCustomer(String name, Customer customer) {
         theCustomers.put(name, customer);
