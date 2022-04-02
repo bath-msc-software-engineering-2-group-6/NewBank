@@ -41,7 +41,7 @@ public class PayIn implements Command {
                     acc.credit(amount);
                     atm.debit(amount);
                     myResponse = "SUCCESS";
-                 
+
                 }
 
             } catch (Exception e) {
