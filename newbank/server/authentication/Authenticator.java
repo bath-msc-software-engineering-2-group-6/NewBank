@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class Authenticator {
     public static Authenticator theInstance;
-    private HashMap<CustomerID, String> authenticatorKeys;
+    public HashMap<String, String> authenticatorKeys;
     public String code;
 
     private Authenticator() {
@@ -41,7 +41,7 @@ public class Authenticator {
 
     public void runAuthentication(String key){
         String lastCode = null;
-        while (true) {
+        while (lastCode == null) {
             code = getTOTPCode(key);
             if (!code.equals(lastCode)) {
                 //System.out.println(code);
@@ -53,8 +53,8 @@ public class Authenticator {
         }
     }
 
-    public void addAuthentication(CustomerID customerID, String secretKey){
-        authenticatorKeys.put(customerID, secretKey);
+    public void addAuthentication(String name, String secretKey){
+        authenticatorKeys.put(name, secretKey);
     }
 
     public String getSecretKey(CustomerID customerID){

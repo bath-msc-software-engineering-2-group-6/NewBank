@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 public class SetupAuthenticator implements Command {
     private final Authenticator theAuthenticator = Authenticator.getInstance();
-    private final CustomerManager theCustomerManager = CustomerManager.getInstance();
 
     public CommandResponse process(ArrayList<String> anArgsList) throws CommandException {
         if (anArgsList.size() != 1) {
@@ -22,7 +21,7 @@ public class SetupAuthenticator implements Command {
             String myResponse = "";
             CustomerID customerID = new CustomerID(anArgsList.get(0));
             String secretKey = theAuthenticator.generateSecretKey();
-            theAuthenticator.addAuthentication(customerID, secretKey);
+            theAuthenticator.addAuthentication(customerID.getKey(), secretKey);
             String barCode = QRGen.getGoogleAuthenticatorBarCode(secretKey, customerID.getKey(), "NewBankSys");
             try {
                 QRGen.createQRCode(barCode, "D:\\CompSc\\SE2\\qr.png", 200,200);
