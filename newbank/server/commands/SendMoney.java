@@ -2,6 +2,7 @@ package newbank.server.commands;
 
 import newbank.server.accounts.Account;
 import newbank.server.authentication.Authenticator;
+import newbank.server.authentication.QRGen;
 import newbank.server.customers.Customer;
 import newbank.server.customers.CustomerID;
 import newbank.server.customers.CustomerManager;
