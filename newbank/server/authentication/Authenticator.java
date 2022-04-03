@@ -39,18 +39,9 @@ public class Authenticator {
         return TOTP.getOTP(hexKey);
     }
 
-    public void runAuthentication(String key){
-        String lastCode = null;
-        while (lastCode == null) {
-            code = getTOTPCode(key);
-            if (!code.equals(lastCode)) {
-                //System.out.println(code);
-            }
-            lastCode = code;
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {};
-        }
+    public void getCode(String key){
+        code = getTOTPCode(key);
+
     }
 
     public void addAuthentication(String name, String secretKey){

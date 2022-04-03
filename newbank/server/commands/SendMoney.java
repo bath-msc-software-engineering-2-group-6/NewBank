@@ -47,7 +47,7 @@ public class SendMoney implements Command{
                     if (amount > Constants.limit2FA){
                         if (theAuthenticator.authenticatorKeys.containsKey(customer.getCustomerId().getKey())){
                             String secretKey = theAuthenticator.authenticatorKeys.get(customer.getCustomerId().getKey());
-                            theAuthenticator.runAuthentication(secretKey);
+                            theAuthenticator.getCode(secretKey);
                             if (!string2FA.equals(theAuthenticator.code)){
                                 myResponse = "Incorrect 2FA Code";
                                 return new CommandResponse(myResponse);

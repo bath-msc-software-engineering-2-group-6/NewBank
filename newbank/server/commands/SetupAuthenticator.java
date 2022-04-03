@@ -3,6 +3,7 @@ package newbank.server.commands;
 import com.google.zxing.WriterException;
 import newbank.server.authentication.Authenticator;
 import newbank.server.authentication.QRGen;
+import newbank.server.authentication.QRViewer;
 import newbank.server.customers.CustomerID;
 import newbank.server.customers.CustomerManager;
 
@@ -24,14 +25,16 @@ public class SetupAuthenticator implements Command {
             theAuthenticator.addAuthentication(customerID.getKey(), secretKey);
             String barCode = QRGen.getGoogleAuthenticatorBarCode(secretKey, customerID.getKey(), "NewBankSys");
             try {
-                QRGen.createQRCode(barCode, "D:\\CompSc\\SE2\\qr.png", 200,200);
+                QRGen.createQRCode(barCode, "QR.png", 200,200);
+                QRViewer.viewQR();
             } catch (WriterException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
             myResponse = "Your key is " + secretKey;
-            myResponse = myResponse.concat(". Please enter this into Google Authenticator to complete setup");
+            myResponse = myResponse.concat(". Please enter this into Google Authenticator to complete setup\n");
+            myResponse = myResponse.concat("Or use the QR code displayed in the new window.");
 
             return new CommandResponse(myResponse);
         }
