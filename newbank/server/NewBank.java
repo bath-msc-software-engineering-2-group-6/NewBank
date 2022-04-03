@@ -49,7 +49,7 @@ public class NewBank {
 				if (myCommand != null) {
 					System.out.println("Processing command.");
 
-					// Remove our processed command, remaining items are the arMguments.
+					// Remove our processed command, remaining items are the arguments.
 					anArgsList.remove(0);
 					myCommandResponse = myCommand.process(anArgsList);
 
