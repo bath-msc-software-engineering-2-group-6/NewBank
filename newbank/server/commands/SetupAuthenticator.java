@@ -5,8 +5,6 @@ import newbank.server.authentication.Authenticator;
 import newbank.server.authentication.QRGen;
 import newbank.server.authentication.QRViewer;
 import newbank.server.customers.CustomerID;
-import newbank.server.customers.CustomerManager;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
