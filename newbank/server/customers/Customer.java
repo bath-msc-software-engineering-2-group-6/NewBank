@@ -28,8 +28,8 @@ public class Customer {
 		return myString;
 	}
 
-	public void setPassword(String Password){
-		this.password =  Password;
+	public void setPassword(String password){
+		this.password =  password;
 	}
 
 	public String getPassword(){

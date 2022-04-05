@@ -1,4 +1,6 @@
-This document details the protocol for interacting with the NewBank server.  
+This document details the protocol for interacting with the NewBank server.
+
+First, you need to setup the database. Create a new database
 
 A customer enters the command below and sees the messages returned 
 

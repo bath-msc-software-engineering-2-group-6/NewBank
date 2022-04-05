@@ -3,6 +3,10 @@ package newbank.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+// Importing database
+import java.sql.*;
+// Importing required classes
+import java.util.*;
 
 public class NewBankServer extends Thread{
 	
@@ -21,7 +25,7 @@ public class NewBankServer extends Thread{
 				NewBankClientHandler clientHandler = new NewBankClientHandler(s);
 				clientHandler.start();
 			}
-		} catch (IOException e) {
+		} catch (IOException | SQLException e) {
 			e.printStackTrace();
 		}
 		finally {

@@ -8,7 +8,11 @@ import newbank.server.commands.CommandResponse;
 import newbank.server.customers.Customer;
 import newbank.server.customers.CustomerID;
 import newbank.server.customers.CustomerManager;
+import newbank.server.customers.CustomerModel;
+import newbank.server.database.Database;
+import newbank.server.database.DatabaseSeeder;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class NewBank {
@@ -17,6 +21,7 @@ public class NewBank {
 	private CustomerManager theCustomerManager = CustomerManager.getInstance();
 	private CommandManager theCommandManager = CommandManager.getInstance();
 	private AccountManager theAccountManager = AccountManager.getInstance();
+	private Database db = Database.getInstance();
 	
 	private NewBank() { }
 
@@ -65,17 +70,12 @@ public class NewBank {
 		return myResponse;
 	}
 
-	public void setUpTestEnvironment() {
-		Customer bhagy = theCustomerManager.createCustomer("Bhagy", "password");
-		bhagy.addAccount(theAccountManager.createAccount(bhagy.getCustomerId(),"Main", 10000.0));
-		bhagy.setPassword("password");
-
-		Customer christina = theCustomerManager.createCustomer("Christina", "password");
-		christina.addAccount(theAccountManager.createAccount(christina.getCustomerId(), "Savings", 1500.0));
-		christina.setPassword(("password"));
-
-		Customer john = theCustomerManager.createCustomer("John", "password");
-		john.addAccount(theAccountManager.createAccount(john.getCustomerId(),"Checking", 250.0));
-		john.setPassword(("password"));
+	public void setUpTestEnvironment() throws SQLException {
+		if(DatabaseSeeder.checkDbSeeded()) {
+			ArrayList<Customer> savedCustomers = (new CustomerModel()).fetchAllCustomersFromDb();
+			theCustomerManager.updateCustomersList(savedCustomers);
+		} else {
+			(new DatabaseSeeder()).run();
+		}
 	}
 }
