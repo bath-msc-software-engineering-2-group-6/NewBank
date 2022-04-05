@@ -1,5 +1,6 @@
 package newbank.server.database;
 
+import newbank.server.accounts.AccountModel;
 import newbank.server.customers.CustomerModel;
 
 import java.io.File;
@@ -20,15 +21,6 @@ public class Database {
         theInstance.getActiveConnection();
 
         return theInstance;
-    }
-
-    public void destroyAllTables() {
-        String sql1 = "select 'drop table ' || name || ';' from sqlite_master where type = 'table';";
-        // SELECT name FROM sqlite_master WHERE type='table' AND name='test_table1';
-        // CREATE TABLE IF NOT EXISTS projects (
-        //    project_id   INTEGER PRIMARY KEY,
-        //    project_name TEXT    NOT NULL
-        //);
     }
 
     public boolean hasTable(String tableName) throws SQLException {
@@ -52,9 +44,10 @@ public class Database {
     }
 
     public void runMigrations() throws SQLException {
-        // ! ORDER IS IMPORTANT because of db relationships
         // Customer table
         CustomerModel.setupTable();
+        // Accounts
+        AccountModel.setupTable();
     }
 
     public Connection getActiveConnection() {

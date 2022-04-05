@@ -1,5 +1,7 @@
 package newbank.server.customers;
 
+import newbank.server.accounts.Account;
+import newbank.server.accounts.AccountModel;
 import newbank.server.database.Column;
 import newbank.server.database.ColumnType;
 import newbank.server.database.Database;
@@ -50,17 +52,24 @@ public class CustomerModel extends Model<Customer> {
         return c;
     }
 
-    public ArrayList<Customer> fromJsonCollection(ArrayList<HashMap<String, Object>> jsonCollection) {
-        return new ArrayList<Customer>(jsonCollection.stream().map(customer -> fromJson(customer)).toList());
-    }
+//    public ArrayList<Customer> fromJsonCollection(ArrayList<HashMap<String, Object>> jsonCollection) {
+//        return new ArrayList<Customer>(jsonCollection.stream().map(customer -> fromJson(customer)).toList());
+//    }
 
     public void insertToDb() throws SQLException {
         super.insertToDb(tableName, this.toJson());
     }
 
     public ArrayList<Customer> fetchAllCustomersFromDb() throws SQLException {
-        ArrayList<HashMap<String, Object>> customers = super.fetchAllFromDb(tableName);
+        ArrayList<HashMap<String, Object>> customersJson = super.fetchAllFromDb(tableName);
+        ArrayList<Customer> customers = fromJsonCollection(customersJson);
+        for(Customer customer : customers) {
+            ArrayList<Account> accounts = (new AccountModel()).fetchCustomerAccountsFromDb(customer);
+            for(Account account: accounts) {
+                customer.addAccount(account.getAccountId(), false);
+            }
+        }
 
-        return fromJsonCollection(customers);
+        return customers;
     }
 }

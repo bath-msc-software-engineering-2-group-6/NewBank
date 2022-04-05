@@ -63,6 +63,9 @@ public class NewBank {
 			} catch (CommandException e) {
 				myCommandResponse = myCommand.usage();
 				System.err.println(e.getMessage());
+			} catch (SQLException e) {
+				myCommandResponse = new CommandResponse("Sorry  an error occured on our end");
+				e.printStackTrace();
 			}
 		}
 		myResponse = myCommandResponse.getResponse();

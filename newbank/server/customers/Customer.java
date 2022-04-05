@@ -3,7 +3,9 @@ package newbank.server.customers;
 import newbank.server.accounts.Account;
 import newbank.server.accounts.AccountID;
 import newbank.server.accounts.AccountManager;
+import newbank.server.accounts.AccountModel;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 
@@ -40,7 +42,19 @@ public class Customer {
 		return theCustomerId;
 	}
 
-	public void addAccount(AccountID anAccountId) {
+	public void addAccount(AccountID anAccountId) throws SQLException {
+		addAccount(anAccountId, true);
+	}
+
+	public void addAccount(AccountID anAccountId, boolean saveToDb) throws SQLException {
+		if(saveToDb) {
+			// save to db
+			Account theAccount = theAccountManager.getAccount(anAccountId);
+			AccountModel accountModel = new AccountModel(theAccount);
+			accountModel.insertToDb();
+		}
+
+		// add to the list
 		theAccountIds.add(anAccountId);
 	}
 

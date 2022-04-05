@@ -1,5 +1,6 @@
 package newbank.server.database;
 
+import newbank.server.accounts.Account;
 import newbank.server.customers.Customer;
 
 import java.sql.ResultSet;
@@ -7,6 +8,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 public abstract class Model<T> {
     Database db = Database.getInstance();
@@ -18,6 +20,10 @@ public abstract class Model<T> {
     public abstract HashMap<String, Object> toJson();
 
     public abstract T fromJson(HashMap<String, Object>  json);
+
+    public ArrayList<T> fromJsonCollection(ArrayList<HashMap<String, Object>> jsonCollection) {
+        return new ArrayList<T>(jsonCollection.stream().map(c -> fromJson(c)).toList());
+    }
 
     // Create a new entry in the database
     public void insertToDb(String tableName, HashMap<String, Object> objectToInsert) throws SQLException {
@@ -36,8 +42,7 @@ public abstract class Model<T> {
         db.executeUpdate(sql);
     }
 
-    public ArrayList<HashMap<String, Object>> fetchAllFromDb(String tableName) throws SQLException {
-        String sql = String.format("select * from %s", tableName);
+    public ArrayList<HashMap<String, Object>> getQueryResults(String sql) throws SQLException {
         ResultSet resultSet = db.query(sql);
 
         ResultSetMetaData rsmd = resultSet.getMetaData();
@@ -53,5 +58,20 @@ public abstract class Model<T> {
             items.add(item);
         }
         return items;
+    }
+
+    public ArrayList<HashMap<String, Object>> fetchAllFromDb(String tableName) throws SQLException {
+        String sql = String.format("SELECT * FROM %s", tableName);
+        return getQueryResults(sql);
+    }
+
+    public ArrayList<HashMap<String, Object>> fetchAllFromDb(String tableName, HashMap<String, String> where) throws SQLException {
+        if(where.isEmpty()) return fetchAllFromDb(tableName);
+
+        String whereQuery = String.format("WHERE %s", where.entrySet().stream().map(entry -> String.format("%s='%s'", entry.getKey(), entry.getValue())).collect(Collectors.joining(" AND ")));
+
+        String sql = String.format("select * from %s %s;", tableName, whereQuery);
+
+        return getQueryResults(sql);
     }
 }
