@@ -7,13 +7,13 @@ import java.util.ArrayList;
 
 public class LoanMarket {
     public static LoanMarket theInstance;
-    ArrayList<String> loans = new ArrayList<String>();
+    ArrayList<String> loans = new ArrayList<>();
+    //private HashMap<Integer, loans> loanMarket;
 
     public static LoanMarket getInstance() {
         if (theInstance == null) {
             theInstance = new LoanMarket();
         }
-
         return theInstance;
     }
 
@@ -33,9 +33,16 @@ public class LoanMarket {
 
     public String showLoans(){
         String loanTable = "Loan Marketplace \n";
+        int loanNumber = 0;
         for (String loan : loans){
-            loanTable = loanTable.concat(loan + "\n");
+            String loanNumberString = Integer.toString(loanNumber);
+            loanTable = loanTable.concat(loanNumberString + loan + "\n");
+            loanNumber++;
         }
         return loanTable;
+    }
+
+    public void removeLoan(){
+
     }
 }

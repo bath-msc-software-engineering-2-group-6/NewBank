@@ -21,6 +21,7 @@ public final class CommandManager {
         theCommandMap.put("WITHDRAW", new Withdraw());
         theCommandMap.put("PAYIN", new PayIn());
         theCommandMap.put("CREATELOAN" , new CreateLoan());
+        theCommandMap.put("SHOWLOANS" , new ShowLoans());
     }
 
     public static CommandManager getInstance() {
