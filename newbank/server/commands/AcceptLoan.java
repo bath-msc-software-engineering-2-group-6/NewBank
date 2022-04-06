@@ -32,8 +32,8 @@ public class AcceptLoan implements Command {
     }
 
     public CommandResponse usage() {
-        String myResponse = "SHOWLOANS Example usage:\n";
-        myResponse = myResponse.concat("SHOWLOANS\n");
+        String myResponse = "ACCEPTLOAN Example usage:\n";
+        myResponse = myResponse.concat("ACCEPTLOAN <Receiving Account> <Loan Number>\n");
 
         return new CommandResponse(myResponse);
     }
