@@ -22,7 +22,7 @@ public class AcceptLoan implements Command {
             Customer customer = theCustomerManager.getCustomer(new CustomerID(anArgsList.get(0)));
             String accName = anArgsList.get(1);
             Account receivingAcc = customer.findAccount(accName);
-            int loanNumber = anArgsList.indexOf(2);
+            Integer loanNumber = Integer.parseInt(anArgsList.get(2));
 
             LoanMarket.getInstance().acceptLoan(receivingAcc, loanNumber);
         return new CommandResponse("Success");
