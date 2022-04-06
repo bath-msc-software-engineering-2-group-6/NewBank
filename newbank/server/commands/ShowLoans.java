@@ -8,7 +8,7 @@ public class ShowLoans implements Command {
 
     public CommandResponse process(ArrayList<String> anArgsList) throws CommandException {
 
-        if (anArgsList.size() != 4) {
+        if (anArgsList.size() != 1) {
 
             String myException = "Invalid arguments, anArgsList contains: ";
             myException = myException.concat(anArgsList.toString());

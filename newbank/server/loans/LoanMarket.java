@@ -3,6 +3,8 @@ package newbank.server.loans;
 
 import newbank.server.accounts.Account;
 import newbank.server.accounts.AccountID;
+import newbank.server.customers.Customer;
+import newbank.server.customers.CustomerID;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +15,10 @@ public class LoanMarket {
     ArrayList<String> loans = new ArrayList<>();
     public HashMap<Integer, LoanOffer> loanMarket;
     private int loanNumber = 0;
+
+    private LoanMarket(){
+        loanMarket = new HashMap<>();
+    }
 
     public static LoanMarket getInstance() {
         if (theInstance == null) {
@@ -29,7 +35,8 @@ public class LoanMarket {
         loanDescription = loanDescription.concat(balance);
 
         LoanOffer loanOffer = new LoanOffer(aHolder, anInterestRate, aBalance);
-        loanMarket.put(loanNumber, loanOffer);
+        Integer loanInteger = loanNumber;
+        this.loanMarket.put(loanInteger, loanOffer);
         loanNumber++;
 
         loans.add(loanDescription);
@@ -37,10 +44,12 @@ public class LoanMarket {
 
     public String showLoans(){
         String loanTable = "Loan Marketplace \n";
+        loanTable = loanTable.concat("Loan Number\t|AccountID\t|Interest\t|Balance\n");
         for (Integer loan: loanMarket.keySet()) {
             String key = loan.toString();
-            String value = loanMarket.get(loan).toString();
-            loanTable = loanTable.concat(key + " : " + value + "\n");
+            LoanOffer value = loanMarket.get(loan);
+            String valueString = value.getSummary();
+            loanTable = loanTable.concat(key + "\t\t\t|" + valueString + "\n");
         }
         return loanTable;
     }
