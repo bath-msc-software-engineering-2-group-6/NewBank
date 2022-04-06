@@ -25,6 +25,7 @@ public class AcceptLoan implements Command {
             Integer loanNumber = Integer.parseInt(anArgsList.get(2));
 
             LoanMarket.getInstance().acceptLoan(receivingAcc, loanNumber);
+            LoanMarket.getInstance().removeLoan(loanNumber);
         return new CommandResponse("Success");
         }
     }

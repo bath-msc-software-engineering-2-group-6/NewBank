@@ -59,7 +59,7 @@ public class LoanMarket {
     }
 
 // Not implemented yet
-    public void removeLoan(int loanNumber){
+    public void removeLoan(Integer loanNumber){
         loanMarket.remove(loanNumber);
     }
 }
