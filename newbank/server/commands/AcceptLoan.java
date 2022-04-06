@@ -4,14 +4,12 @@ import newbank.server.accounts.Account;
 import newbank.server.customers.Customer;
 import newbank.server.customers.CustomerID;
 import newbank.server.customers.CustomerManager;
-import newbank.server.loans.Loan;
 import newbank.server.loans.LoanMarket;
 
 import java.util.ArrayList;
 
 public class AcceptLoan implements Command {
     private final CustomerManager theCustomerManager = CustomerManager.getInstance();
-    LoanMarket loanMarket = LoanMarket.getInstance();
 
     public CommandResponse process(ArrayList<String> anArgsList) throws CommandException {
 
@@ -26,8 +24,8 @@ public class AcceptLoan implements Command {
             Account receivingAcc = customer.findAccount(accName);
             int loanNumber = anArgsList.indexOf(2);
 
-            Loan loan = new Loan(receivingAcc.getAccountId(), loanMarket.loanMarket.get(loanNumber).getAccount(), loanMarket.loanMarket.get(loanNumber).getInterestRate(), loanMarket.loanMarket.get(loanNumber).getBalance());
-            return new CommandResponse("Success");
+            LoanMarket.getInstance().acceptLoan(receivingAcc, loanNumber);
+        return new CommandResponse("Success");
         }
     }
 

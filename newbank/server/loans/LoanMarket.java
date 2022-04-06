@@ -1,6 +1,7 @@
 package newbank.server.loans;
 
 
+import newbank.server.accounts.Account;
 import newbank.server.accounts.AccountID;
 
 import java.util.ArrayList;
@@ -33,11 +34,6 @@ public class LoanMarket {
 
         loans.add(loanDescription);
     }
-    /*
-    public void acceptLoan(int loanNumber){
-        Loan loan = new Loan(loanMarket.get(loanNumber).getAccount(), loanMarket.get(loanNumber).getInterestRate(), loanMarket.get(loanNumber).getBalance());
-    }
-     */
 
     public String showLoans(){
         String loanTable = "Loan Marketplace \n";
@@ -49,7 +45,14 @@ public class LoanMarket {
         return loanTable;
     }
 
-    public void removeLoan(){
+    public void acceptLoan(Account acc, int loanNum){
+        Loan loan = new Loan(acc.getAccountId(), loanMarket.get(loanNum).getAccount(), loanMarket.get(loanNum).getInterestRate(), loanMarket.get(loanNum).getBalance());
 
+        LoanVault.getInstance().activeLoans.put(loanNum, loan);
+    }
+
+// Not implemented yet
+    public void removeLoan(int loanNumber){
+        loanMarket.remove(loanNumber);
     }
 }
