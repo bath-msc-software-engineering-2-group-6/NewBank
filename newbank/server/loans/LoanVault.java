@@ -46,4 +46,9 @@ public class LoanVault {
 
         return summary;
     }
+
+    public Loan getLoan(String loanNumber){
+        Integer loanNum = Integer.parseInt(loanNumber);
+        return activeLoans.get(loanNum);
+    }
 }
