@@ -20,6 +20,11 @@ public final class CommandManager {
         theCommandMap.put("SENDMONEY", new SendMoney());
         theCommandMap.put("WITHDRAW", new Withdraw());
         theCommandMap.put("PAYIN", new PayIn());
+        theCommandMap.put("CREATELOAN" , new CreateLoan());
+        theCommandMap.put("SHOWLOANS" , new ShowLoans());
+        theCommandMap.put("ACCEPTLOAN", new AcceptLoan());
+        theCommandMap.put("SHOWMYLOANS", new ShowMyLoans());
+        theCommandMap.put("REPAYLOAN", new RepayLoan());
     }
 
     public static CommandManager getInstance() {

@@ -7,15 +7,20 @@ import newbank.server.customers.Customer;
 import newbank.server.customers.CustomerID;
 import newbank.server.customers.CustomerManager;
 
+import java.time.Duration;
+import java.time.LocalDate;
+
 public class Loan {
 
     private final CustomerManager theCustomerManager = CustomerManager.getInstance();
     private final AccountManager theAccountManager = AccountManager.getInstance();
 
+    private final CustomerID theCustomer;
     private final AccountID theHolder;
     private final AccountID theRecipient;
     private final double theInterestRate;
     private double theBalance;
+    private LocalDate startDate;
 
     /**
      * Class which represents a loan between a holder and a recipient.
@@ -24,12 +29,14 @@ public class Loan {
      * @param anInterestRate - the interest rate of the loan
      * @param aBalance - the balance of the loan
      */
-    public Loan(AccountID aHolder, AccountID aRecipient, double anInterestRate, double aBalance) {
+    public Loan(CustomerID aCustomer, AccountID aHolder, AccountID aRecipient, double anInterestRate, double aBalance) {
 
+        this.theCustomer = aCustomer;
         this.theHolder = aHolder;
         this.theRecipient = aRecipient;
         this.theInterestRate = anInterestRate;
         this.theBalance = aBalance;
+        this.startDate = LocalDate.now();
 
         credit(aBalance);
     }
@@ -78,6 +85,15 @@ public class Loan {
         return theInterestRate;
     }
 
+    public void applyInterest(){
+        LocalDate dateNow = LocalDate.now();
+        long daysBetween = Duration.between(this.startDate, dateNow).toDays();
+
+        if(daysBetween > 364){
+            this.theBalance = this.theBalance*(this.theInterestRate/100);
+            startDate = LocalDate.now();
+        }
+    }
     /**
      * Credits the account with a given amount.
      * @param anAmount - the given amount
@@ -93,6 +109,7 @@ public class Loan {
      * @return true if successful, otherwise false
      */
     public boolean repay(double anAmount) {
+        this.theBalance = this.theBalance-anAmount;
         return theAccountManager.transferMoney(theRecipient, theHolder, anAmount);
     }
 

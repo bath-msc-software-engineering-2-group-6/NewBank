@@ -37,7 +37,7 @@ class LoanTest {
         AccountID myHolderAccountId = theHolder.findAccount("Main").getAccountId();
         AccountID myRecipientAccountId = theRecipient.findAccount("Main").getAccountId();
 
-        theLoan = new Loan(myHolderAccountId, myRecipientAccountId, 5.0, 10000);
+        theLoan = new Loan(theHolder.getCustomerId(), myHolderAccountId, myRecipientAccountId, 5.0, 10000);
         Assertions.assertEquals(theHolder, theLoan.getHolder());
     }
 
@@ -46,7 +46,7 @@ class LoanTest {
         AccountID myHolderAccountId = theHolder.findAccount("Main").getAccountId();
         AccountID myRecipientAccountId = theRecipient.findAccount("Main").getAccountId();
 
-        theLoan = new Loan(myHolderAccountId, myRecipientAccountId, 5.0, 10000);
+        theLoan = new Loan(theHolder.getCustomerId(), myHolderAccountId, myRecipientAccountId, 5.0, 10000);
         Assertions.assertEquals(theRecipient, theLoan.getRecipient());
     }
 
@@ -58,7 +58,7 @@ class LoanTest {
         Assertions.assertEquals(100000, myHolderAccount.getBalance());
         Assertions.assertEquals(0, myRecipientAccount.getBalance());
 
-        theLoan = new Loan(myHolderAccount.getAccountId(), myRecipientAccount.getAccountId(), 5.0, 10000);
+        theLoan = new Loan(theHolder.getCustomerId(), myHolderAccount.getAccountId(), myRecipientAccount.getAccountId(), 5.0, 10000);
 
         Assertions.assertEquals(90000, myHolderAccount.getBalance());
         Assertions.assertEquals(10000, myRecipientAccount.getBalance());
@@ -70,7 +70,7 @@ class LoanTest {
         Account myHolderAccount = theHolder.findAccount("Main");
         Account myRecipientAccount = theRecipient.findAccount("Main");
 
-        theLoan = new Loan(myHolderAccount.getAccountId(), myRecipientAccount.getAccountId(), 5.0, 10000);
+        theLoan = new Loan(theHolder.getCustomerId(), myHolderAccount.getAccountId(), myRecipientAccount.getAccountId(), 5.0, 10000);
 
         theLoan.repay(500);
 

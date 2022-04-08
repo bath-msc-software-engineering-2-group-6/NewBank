@@ -4,6 +4,8 @@ import newbank.server.commands.Constants;
 import newbank.server.customers.Customer;
 import newbank.server.customers.CustomerID;
 import newbank.server.customers.CustomerManager;
+import newbank.server.loans.Loan;
+import newbank.server.loans.LoanVault;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,6 +22,7 @@ public class NewBankClientHandler extends Thread{
 	private PrintWriter out;
 	private CustomerID customer;
 	private final CustomerManager theCustomerManager = CustomerManager.getInstance();
+	private LoanVault theLoanVault = LoanVault.getInstance();
 
 	/**
 	 * Instantiates I/O for client handler and gets NewBank object
@@ -35,6 +38,7 @@ public class NewBankClientHandler extends Thread{
 	 * Handles requests from user from startup to commands when logged in
 	 */
 	public void run() {
+		applyInterestAll();
 		boolean loggedIn = false;
 		// keep getting requests from the client and processing them
 		try {
@@ -80,6 +84,14 @@ public class NewBankClientHandler extends Thread{
 			}
 		}
 	}
+
+	public void applyInterestAll(){
+		for (Integer loan : theLoanVault.activeLoans.keySet()){
+			Loan aLoan = theLoanVault.activeLoans.get(loan);
+			aLoan.applyInterest();
+		}
+	}
+
 	/**
 	 * Allows the user the choice of logging in or creating a new customer object
 	 */
