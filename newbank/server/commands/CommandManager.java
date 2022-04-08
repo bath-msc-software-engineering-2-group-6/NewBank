@@ -23,6 +23,7 @@ public final class CommandManager {
         theCommandMap.put("CREATELOAN" , new CreateLoan());
         theCommandMap.put("SHOWLOANS" , new ShowLoans());
         theCommandMap.put("ACCEPTLOAN", new AcceptLoan());
+        theCommandMap.put("SHOWMYLOANS", new ShowMyLoans());
     }
 
     public static CommandManager getInstance() {
