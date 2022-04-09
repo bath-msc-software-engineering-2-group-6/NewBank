@@ -44,9 +44,9 @@ public class AccountModel extends Model<Account> {
     @Override
     public HashMap<String, Object> toJson() {
         HashMap<String, Object> json = new HashMap();
-        json.put("id", account.getAccountId().getAccountID());
-        json.put("name", account.getAccountName());
-        json.put("customer_id", account.getCustomerId().getKey());
+        json.put("id", String.format("'%s'", account.getAccountId().getAccountID()));
+        json.put("name", String.format("'%s'", account.getAccountName()));
+        json.put("customer_id", String.format("'%s'", account.getCustomerId().getKey()));
         json.put("balance", convertBalanceToCents(account.getBalance()));
 
         return json;
@@ -74,6 +74,10 @@ public class AccountModel extends Model<Account> {
 
     public void insertToDb() throws SQLException {
         super.insertToDb(tableName, this.toJson());
+    }
+
+    public void updateDb() throws SQLException {
+        super.updateDb(tableName, this.toJson(), "id");
     }
 
     public ArrayList<Account> fetchAllAccountsFromDb() throws SQLException {

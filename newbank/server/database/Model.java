@@ -42,6 +42,12 @@ public abstract class Model<T> {
         db.executeUpdate(sql);
     }
 
+    public void updateDb(String tableName, HashMap<String, Object> objectToInsert, String primaryKey) throws SQLException {
+        String keysWithoutKeyset = objectToInsert.keySet().stream().filter(s -> s != primaryKey).map(s -> String.format("%s=%s", s, objectToInsert.get(s).toString())).collect(Collectors.joining(","));
+        String updateSql = String.format("UPDATE %s SET %s WHERE %s=%s", tableName, keysWithoutKeyset, primaryKey, objectToInsert.get(primaryKey));
+        db.executeUpdate(updateSql);
+    }
+
     public ArrayList<HashMap<String, Object>> getQueryResults(String sql) throws SQLException {
         ResultSet resultSet = db.query(sql);
 

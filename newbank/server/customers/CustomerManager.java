@@ -47,7 +47,6 @@ public final class CustomerManager {
         // TODO: refactor this and get rid of this constructor
         (new CustomerModel(myCustomer)).insertToDb();
 
-
         return myCustomer;
     }
 

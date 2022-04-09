@@ -58,10 +58,18 @@ public class Customer {
 		theAccountIds.add(anAccountId);
 	}
 
-	public boolean hasAccount(String accountName) {
-		System.out.println(accountName);
-		System.out.println(accountsToString());
+	public void addAccount(Account anAccount) throws SQLException {
+		Account theSavedAccount = theAccountManager.getAccount(anAccount.getAccountId());
 
+		// This account is not yet in the instance.
+		if(theSavedAccount == null) {
+			theSavedAccount = theAccountManager.putAccount(anAccount);
+		}
+		// add to the list
+		theAccountIds.add(theSavedAccount.getAccountId());
+	}
+
+	public boolean hasAccount(String accountName) {
 		// Find accountName in list of user accounts
 		Account existingAccount = theAccountManager.findAccount(theAccountIds, accountName);
 

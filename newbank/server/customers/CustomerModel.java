@@ -1,6 +1,8 @@
 package newbank.server.customers;
 
 import newbank.server.accounts.Account;
+import newbank.server.accounts.AccountID;
+import newbank.server.accounts.AccountManager;
 import newbank.server.accounts.AccountModel;
 import newbank.server.database.Column;
 import newbank.server.database.ColumnType;
@@ -12,6 +14,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class CustomerModel extends Model<Customer> {
     public static String tableName = "customers";
@@ -66,7 +69,7 @@ public class CustomerModel extends Model<Customer> {
         for(Customer customer : customers) {
             ArrayList<Account> accounts = (new AccountModel()).fetchCustomerAccountsFromDb(customer);
             for(Account account: accounts) {
-                customer.addAccount(account.getAccountId(), false);
+                customer.addAccount(account);
             }
         }
 

@@ -2,6 +2,8 @@ package newbank.server.accounts;
 
 import newbank.server.customers.CustomerID;
 
+import java.sql.SQLException;
+
 public class Account {
 	public static double DEFAULT_OPENING_BALANCE = 0.0;
 
@@ -53,13 +55,21 @@ public class Account {
 		return balance;
 	}
 
-	public void credit (double credit) {
-		balance += credit;
+	public void saveBalance(double newBalance) throws SQLException {
+		balance = newBalance;
+		(new AccountModel(this)).updateDb();
 	}
 
-	public void debit (double debit) {
+	public void credit (double credit) throws SQLException {
+		double newBalance = balance + credit;
+		saveBalance(newBalance);
+	}
+
+	public void debit (double debit) throws SQLException {
+		double newBalance;
 		if (balance > debit){
-			balance -= debit;
+			newBalance = balance - debit;
+			saveBalance(newBalance);
 		} else {
 			System.out.println("Insufficient funds.\n");
 		}

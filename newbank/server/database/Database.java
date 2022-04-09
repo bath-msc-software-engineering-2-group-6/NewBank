@@ -89,38 +89,4 @@ public class Database {
         Statement st = theInstance.connection.createStatement();
         return st.executeUpdate(sql);
     }
-
-//    public void connect() {
-//        Connection conn = null;
-//        try {
-//            // db parameters
-//
-//            // create a connection to the database
-//            conn = DriverManager.getConnection(url);
-//
-//            System.out.println("Connection to SQLite has been established.");
-//
-//            String sql = "SELECT \n" +
-//                    "    name\n" +
-//                    "FROM \n" +
-//                    "    sqlite_schema\n" +
-//                    "WHERE \n" +
-//                    "    type ='table'";
-//
-//            Statement st2 = conn.createStatement();
-//
-//            // Executing query
-//            ResultSet rs = st2.executeQuery(sql);
-//            System.out.println(rs.getFetchSize());
-//            while (rs.next()) {
-//                System.out.println(rs.getString("name"));
-//            }
-//
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        } finally {
-//
-//        }
-//
-//    }
 }

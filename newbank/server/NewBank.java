@@ -77,6 +77,8 @@ public class NewBank {
 		if(DatabaseSeeder.checkDbSeeded()) {
 			ArrayList<Customer> savedCustomers = (new CustomerModel()).fetchAllCustomersFromDb();
 			theCustomerManager.updateCustomersList(savedCustomers);
+			// We also want to update the account manager. This is by no means ideal to do it here. Move it later
+//			theAccountManager.putAccount()
 		} else {
 			(new DatabaseSeeder()).run();
 		}

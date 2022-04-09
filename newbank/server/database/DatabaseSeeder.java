@@ -20,7 +20,7 @@ public class DatabaseSeeder {
         if(!Database.getInstance().hasTable(SeederModel.tableName)) return false;
         System.out.println("Database tables are set up");
         ArrayList<HashMap<String, Object>> seedDates = (new SeederModel()).fetchAllFromDb(SeederModel.tableName);
-        System.out.println(seedDates.size() > 0 ? "It's already seeded" : "DB is not Seeded");
+        System.out.println(seedDates.size() > 0 ? "Database is already seeded" : "DB is not Seeded");
         return seedDates.size() > 0;
     }
 

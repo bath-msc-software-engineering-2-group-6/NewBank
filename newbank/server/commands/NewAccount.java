@@ -31,8 +31,8 @@ public class NewAccount implements Command {
             } else if(customer.hasAccount(accountName)) {
                 myResponse = "FAIL";
             } else {
-                myResponse = "SUCCESS";
                 customer.addAccount(theAccountManager.createAccount(customer.getCustomerId(), accountName));
+                myResponse = "SUCCESS";
             }
 
             return new CommandResponse(myResponse);

@@ -2,8 +2,10 @@ package newbank.server.accounts;
 
 import newbank.server.customers.CustomerID;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public final class AccountManager {
     private static AccountManager theInstance;
@@ -26,6 +28,10 @@ public final class AccountManager {
         }
 
         return theInstance;
+    }
+
+    public static HashMap<AccountID, Account> allAccounts() {
+        return getInstance().theAccounts;
     }
 
     /**
@@ -57,6 +63,16 @@ public final class AccountManager {
         theAccounts.put(myAccountId, myAccount);
 
         return myAccountId;
+    }
+
+    /**
+     * Adds a new account to the local collection of accounts. Used for when we fetch accounts from the db.
+     * @param anAccount - the account
+     * @return the account itself
+     */
+    public Account putAccount(Account anAccount) {
+        if(theAccounts.get(anAccount.getAccountId()) == null) theAccounts.put(anAccount.getAccountId(), anAccount);
+        return anAccount;
     }
 
     /**
@@ -102,7 +118,7 @@ public final class AccountManager {
      * @param anAmount - the amount of money to transfer
      * @return true if the transfer is successful, otherwise false
      */
-    public boolean transferMoney(AccountID aFromAccountId, AccountID aToAccountId, double anAmount) {
+    public boolean transferMoney(AccountID aFromAccountId, AccountID aToAccountId, double anAmount) throws SQLException {
         // Retrieve accounts by AccountID.
         Account myFromAccount = getAccount(aFromAccountId);
         Account myToAccount = getAccount(aToAccountId);
