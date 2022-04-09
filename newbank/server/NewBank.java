@@ -70,15 +70,12 @@ public class NewBank {
 	public void setUpTestEnvironment() {
 		Customer bhagy = theCustomerManager.createCustomer("Bhagy", "password");
 		bhagy.addAccount(theAccountManager.createAccount(bhagy.getCustomerId(),"Main", 10000.0));
-		bhagy.setPassword("password");
 
 		Customer christina = theCustomerManager.createCustomer("Christina", "password");
 		christina.addAccount(theAccountManager.createAccount(christina.getCustomerId(), "Savings", 1500.0));
-		christina.setPassword(("password"));
 
 		Customer john = theCustomerManager.createCustomer("John", "password");
 		john.addAccount(theAccountManager.createAccount(john.getCustomerId(),"Checking", 250.0));
-		john.setPassword(("password"));
 
 		Customer newbankUKPLC = theCustomerManager.createCustomer("NewBankUKPLC", "admin");
 		newbankUKPLC.addAccount(theAccountManager.createAccount(newbankUKPLC.getCustomerId(),"ATM", -80000.0));
