@@ -15,10 +15,25 @@ public class Customer {
 	private ArrayList<AccountID> theAccountIds;
 	private final CustomerID theCustomerId;
 	private String password = "password";
+	public boolean locked;
+
 
 	public Customer(CustomerID aCustomerId) {
+		locked = false;
 		theAccountIds = new ArrayList<>();
 		theCustomerId = aCustomerId;
+	}
+
+	public void lockCustomer (){
+		locked = true;
+	}
+
+	public void unlockCustomer (){
+		locked = false;
+	}
+
+	public boolean checkIfLocked(){
+		return locked;
 	}
 
 	public String accountsToString() {

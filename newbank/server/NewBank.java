@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class NewBank {
 	
 	private static final NewBank bank = new NewBank();
-	private CustomerManager theCustomerManager = CustomerManager.getInstance();
+	public CustomerManager theCustomerManager = CustomerManager.getInstance();
 	private CommandManager theCommandManager = CommandManager.getInstance();
 	private AccountManager theAccountManager = AccountManager.getInstance();
 	private Database db = Database.getInstance();
@@ -28,6 +28,8 @@ public class NewBank {
 	public static NewBank getBank() {
 		return bank;
 	}
+
+	public CustomerManager theCustomerManager() {return theCustomerManager;}
 	
 	public synchronized CustomerID checkLogInDetails(String userName, String password) {
 		if(theCustomerManager.validateLogin(userName, password)) {
@@ -78,7 +80,6 @@ public class NewBank {
 			ArrayList<Customer> savedCustomers = (new CustomerModel()).fetchAllCustomersFromDb();
 			theCustomerManager.updateCustomersList(savedCustomers);
 			// We also want to update the account manager. This is by no means ideal to do it here. Move it later
-//			theAccountManager.putAccount()
 		} else {
 			(new DatabaseSeeder()).run();
 		}

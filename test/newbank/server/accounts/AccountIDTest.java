@@ -1,5 +1,7 @@
-package newbank.server.accounts;
+package test.newbank.server.accounts;
 
+import newbank.server.accounts.Account;
+import newbank.server.accounts.AccountID;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

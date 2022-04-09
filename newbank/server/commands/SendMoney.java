@@ -43,10 +43,10 @@ public class SendMoney implements Command{
                     String amountString = argsList.get(2);
                     double amount = Double.parseDouble(amountString);
 
-                    if (amount > 1000){
-                        if (theAuthenticator.containsKey(customer.getCustomerId())){
-                            String secretKey = theAuthenticator.getSecretKey(customer.getCustomerId());
-                            theAuthenticator.runAuthentication(secretKey);
+                    if (amount > Constants.limit2FA){
+                        if (theAuthenticator.authenticatorKeys.containsKey(customer.getCustomerId().getKey())){
+                            String secretKey = theAuthenticator.authenticatorKeys.get(customer.getCustomerId().getKey());
+                            theAuthenticator.getCode(secretKey);
                             if (!string2FA.equals(theAuthenticator.code)){
                                 myResponse = "Incorrect 2FA Code";
                                 return new CommandResponse(myResponse);

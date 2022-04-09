@@ -42,8 +42,8 @@ public class CustomerModel extends Model<Customer> {
     @Override
     public HashMap<String, Object> toJson() {
         HashMap<String, Object> customerJson = new HashMap();
-        customerJson.put("id", customer.getCustomerId().getKey());
-        customerJson.put("password", customer.getPassword());
+        customerJson.put("id", "'" + customer.getCustomerId().getKey() + "'");
+        customerJson.put("password", "'" + customer.getPassword() + "'");
 
         return customerJson;
     }

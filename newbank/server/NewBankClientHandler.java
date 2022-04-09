@@ -5,6 +5,8 @@ import newbank.server.customers.Customer;
 import newbank.server.customers.CustomerID;
 import newbank.server.customers.CustomerManager;
 import newbank.server.database.Database;
+import newbank.server.loans.Loan;
+import newbank.server.loans.LoanVault;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,12 +18,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class NewBankClientHandler extends Thread{
-
+	
 	private NewBank bank;
 	private BufferedReader in;
 	private PrintWriter out;
 	private CustomerID customer;
 	private final CustomerManager theCustomerManager = CustomerManager.getInstance();
+	private LoanVault theLoanVault = LoanVault.getInstance();
 
 	/**
 	 * Instantiates I/O for client handler and gets NewBank object
@@ -40,6 +43,7 @@ public class NewBankClientHandler extends Thread{
 	 * Handles requests from user from startup to commands when logged in
 	 */
 	public void run() {
+		applyInterestAll();
 		boolean loggedIn = false;
 		// keep getting requests from the client and processing them
 		try {
@@ -85,6 +89,14 @@ public class NewBankClientHandler extends Thread{
 			}
 		}
 	}
+
+	public void applyInterestAll(){
+		for (Integer loan : theLoanVault.activeLoans.keySet()){
+			Loan aLoan = theLoanVault.activeLoans.get(loan);
+			aLoan.applyInterest();
+		}
+	}
+
 	/**
 	 * Allows the user the choice of logging in or creating a new customer object
 	 */
@@ -144,21 +156,56 @@ public class NewBankClientHandler extends Thread{
 	 * @return customer object
 	 */
 	public CustomerID login() throws IOException {
+		// ask for user name
+		out.println("Enter Username");
 		try {
-			// ask for user name
-			out.println("Enter Username");
 			String userName = in.readLine();
-			// ask for password
-			out.println("Enter Password");
-			String password = in.readLine();
-			out.println("Checking Details...");
-			// authenticate user and get customer ID token from bank for use in subsequent requests
-			this.customer = bank.checkLogInDetails(userName, password);
-			// if the user is authenticated then get requests from the user and process them
-			return this.customer;
-		} catch (IOException e){
-			e.printStackTrace();
+			//checking if the customer's accounts are locked
+			if (!bank.theCustomerManager.checkCustomerLock(userName)){
+			// we are going to let users try 5 times
+				for (int i = 5; i > 0; i--){
+					// ask for password
+					out.println("Enter Password");
+					String password = in.readLine();
+					out.println("Checking Details...");
+					// authenticate user and get customer ID token from bank for use in subsequent requests
+					this.customer = bank.checkLogInDetails(userName, password);
+					// if the user is authenticated then get requests from the user and process them
+					if (this.customer != null){
+						return this.customer;
+					} else if (i>1){
+						out.println("Password incorrect!");
+						out.println("You can try again " + (i-1) + " times.");
+					} else {
+						out.println("Password incorrect! Customer locked.");
+						bank.theCustomerManager.lockCustomer(userName);
+						return null;
+					}
+				}
+			} else {
+				out.println("Customer locked. Enter masterkey to unlock.");
+				try {
+					String keyString = in.readLine();
+					int key = Integer.parseInt(keyString);
+					if (bank.theCustomerManager.unlockCustomer(userName, key)){
+						out.println("Success! Customer unlocked!");
+					} else {
+						out.println("Incorrect key.");
+					}
+				} catch (Exception ex){
+					out.println("Incorrect input.");
+					return null;
+				}
+
+				return null;
+			}
+			return null;
+		} catch (Exception e) {
+			out.println("Username not found.");
 			return null;
 		}
 	}
+
+
+
 }

@@ -40,6 +40,10 @@ public class DatabaseSeeder {
         Customer john = theCustomerManager.createCustomer("John", "password");
         john.addAccount(theAccountManager.createAccount(john.getCustomerId(),"Checking", 250.0));
 
+        Customer newbankUKPLC = theCustomerManager.createCustomer("NewBankUKPLC", "admin");
+        newbankUKPLC.addAccount(theAccountManager.createAccount(newbankUKPLC.getCustomerId(),"ATM", -80000.0));
+        newbankUKPLC.setPassword(("admin"));
+
         // create a new db table
         String tableName = SeederModel.tableName;
 
@@ -69,7 +73,7 @@ class SeederModel extends Model<SeederModel> {
     @Override
     public HashMap<String, Object> toJson() {
         HashMap<String, Object> seedJson = new HashMap();
-        seedJson.put("seeded_on", seededOn);
+        seedJson.put("seeded_on", "'" + seededOn + "'");
 
         return seedJson;
     }

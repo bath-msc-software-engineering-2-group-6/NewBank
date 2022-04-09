@@ -31,7 +31,7 @@ public abstract class Model<T> {
         ArrayList<String> stringValueList = new ArrayList<String>();
 
         for (Object o : objectToInsert.values()) {
-            stringValueList.add(String.format("'%s'", o.toString()));
+            stringValueList.add(o.toString());
         }
 
         String values = String.join( ",", stringValueList);
