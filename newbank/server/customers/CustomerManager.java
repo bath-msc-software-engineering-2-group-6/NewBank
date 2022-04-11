@@ -1,5 +1,9 @@
 package newbank.server.customers;
 
+import newbank.server.database.Database;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public final class CustomerManager {
@@ -27,10 +31,22 @@ public final class CustomerManager {
         return thePasswordEncryption.verifyPassword(password, myCustomer.getPassword());
     }
 
-    public Customer createCustomer(String name, String password) {
+    // For when we fetch customers from DB
+    public HashMap<String, Customer> updateCustomersList(ArrayList<Customer> customers) {
+        for(Customer customer : customers) {
+            theCustomers.put(customer.getCustomerId().getKey(), customer);
+        }
+        return theCustomers;
+    }
+
+    public Customer createCustomer(String name, String password) throws SQLException{
         Customer myCustomer = new Customer(new CustomerID(name));
         theCustomers.put(name, myCustomer);
+
         theCustomers.get(name).setPassword(thePasswordEncryption.hashPassword(password));
+
+        // TODO: refactor this and get rid of this constructor
+        (new CustomerModel(myCustomer)).insertToDb();
 
         return myCustomer;
     }

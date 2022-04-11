@@ -6,12 +6,13 @@ import newbank.server.customers.CustomerID;
 import newbank.server.customers.CustomerManager;
 import newbank.server.loans.LoanMarket;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AcceptLoan implements Command {
     private final CustomerManager theCustomerManager = CustomerManager.getInstance();
 
-    public CommandResponse process(ArrayList<String> anArgsList) throws CommandException {
+    public CommandResponse process(ArrayList<String> anArgsList) throws CommandException, SQLException {
 
         if (anArgsList.size() != 3) {
 

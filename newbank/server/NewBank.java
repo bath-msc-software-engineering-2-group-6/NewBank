@@ -8,7 +8,11 @@ import newbank.server.commands.CommandResponse;
 import newbank.server.customers.Customer;
 import newbank.server.customers.CustomerID;
 import newbank.server.customers.CustomerManager;
+import newbank.server.customers.CustomerModel;
+import newbank.server.database.Database;
+import newbank.server.database.DatabaseSeeder;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class NewBank {
@@ -17,6 +21,7 @@ public class NewBank {
 	public CustomerManager theCustomerManager = CustomerManager.getInstance();
 	private CommandManager theCommandManager = CommandManager.getInstance();
 	private AccountManager theAccountManager = AccountManager.getInstance();
+	private Database db = Database.getInstance();
 	
 	private NewBank() { }
 
@@ -60,6 +65,9 @@ public class NewBank {
 			} catch (CommandException e) {
 				myCommandResponse = myCommand.usage();
 				System.err.println(e.getMessage());
+			} catch (SQLException e) {
+				myCommandResponse = new CommandResponse("Sorry  an error occured on our end");
+				e.printStackTrace();
 			}
 		}
 		myResponse = myCommandResponse.getResponse();
@@ -67,19 +75,13 @@ public class NewBank {
 		return myResponse;
 	}
 
-	public void setUpTestEnvironment() {
-		Customer bhagy = theCustomerManager.createCustomer("Bhagy", "password");
-		bhagy.addAccount(theAccountManager.createAccount(bhagy.getCustomerId(),"Main", 10000.0));
-
-		Customer christina = theCustomerManager.createCustomer("Christina", "password");
-		christina.addAccount(theAccountManager.createAccount(christina.getCustomerId(), "Savings", 1500.0));
-
-		Customer john = theCustomerManager.createCustomer("John", "password");
-		john.addAccount(theAccountManager.createAccount(john.getCustomerId(),"Checking", 250.0));
-
-		Customer newbankUKPLC = theCustomerManager.createCustomer("NewBankUKPLC", "admin");
-		newbankUKPLC.addAccount(theAccountManager.createAccount(newbankUKPLC.getCustomerId(),"ATM", -80000.0));
-		newbankUKPLC.setPassword(("admin"));
-
+	public void setUpTestEnvironment() throws SQLException {
+		if(DatabaseSeeder.checkDbSeeded()) {
+			ArrayList<Customer> savedCustomers = (new CustomerModel()).fetchAllCustomersFromDb();
+			theCustomerManager.updateCustomersList(savedCustomers);
+			// We also want to update the account manager. This is by no means ideal to do it here. Move it later
+		} else {
+			(new DatabaseSeeder()).run();
+		}
 	}
 }

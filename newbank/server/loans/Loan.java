@@ -7,6 +7,7 @@ import newbank.server.customers.Customer;
 import newbank.server.customers.CustomerID;
 import newbank.server.customers.CustomerManager;
 
+import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDate;
 
@@ -29,7 +30,7 @@ public class Loan {
      * @param anInterestRate - the interest rate of the loan
      * @param aBalance - the balance of the loan
      */
-    public Loan(CustomerID aCustomer, AccountID aHolder, AccountID aRecipient, double anInterestRate, double aBalance) {
+    public Loan(CustomerID aCustomer, AccountID aHolder, AccountID aRecipient, double anInterestRate, double aBalance) throws SQLException {
 
         this.theCustomer = aCustomer;
         this.theHolder = aHolder;
@@ -99,7 +100,7 @@ public class Loan {
      * @param anAmount - the given amount
      * @return true if successful, otherwise false
      */
-    public boolean credit(double anAmount) {
+    public boolean credit(double anAmount) throws SQLException {
         return theAccountManager.transferMoney(theHolder, theRecipient, anAmount);
     }
 
@@ -108,9 +109,10 @@ public class Loan {
      * @param anAmount - the given amount
      * @return true if successful, otherwise false
      */
-    public boolean repay(double anAmount) {
+    public boolean repay(double anAmount) throws SQLException {
+        boolean success = theAccountManager.transferMoney(theRecipient, theHolder, anAmount);
         this.theBalance = this.theBalance-anAmount;
-        return theAccountManager.transferMoney(theRecipient, theHolder, anAmount);
+        return success;
     }
 
 }

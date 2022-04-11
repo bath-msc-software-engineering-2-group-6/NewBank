@@ -3,12 +3,13 @@ package newbank.server.commands;
 import newbank.server.loans.LoanMarket;
 import newbank.server.loans.LoanVault;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RepayLoan implements Command {
     private final LoanVault theLoanVault = LoanVault.getInstance();
 
-    public CommandResponse process(ArrayList<String> anArgsList) throws CommandException {
+    public CommandResponse process(ArrayList<String> anArgsList) throws CommandException, SQLException {
 
         if (anArgsList.size() != 3) {
 

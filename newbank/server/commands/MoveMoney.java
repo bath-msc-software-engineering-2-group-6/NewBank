@@ -47,6 +47,7 @@ public class MoveMoney implements Command {
                         myResponse = "SUCCESS";
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
                     myResponse = "FAIL";
                 }
 

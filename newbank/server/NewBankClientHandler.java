@@ -4,6 +4,7 @@ import newbank.server.commands.Constants;
 import newbank.server.customers.Customer;
 import newbank.server.customers.CustomerID;
 import newbank.server.customers.CustomerManager;
+import newbank.server.database.Database;
 import newbank.server.loans.Loan;
 import newbank.server.loans.LoanVault;
 
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -28,8 +30,11 @@ public class NewBankClientHandler extends Thread{
 	 * Instantiates I/O for client handler and gets NewBank object
 	 * @param s - NewBankServer server socket
 	 */
-	public NewBankClientHandler(Socket s) throws IOException {
+	public NewBankClientHandler(Socket s) throws IOException, SQLException {
 		bank = NewBank.getBank();
+		// Setup database
+		Database.getInstance().runMigrations();
+
 		bank.setUpTestEnvironment();
 		in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 		out = new PrintWriter(s.getOutputStream(), true);
@@ -71,7 +76,7 @@ public class NewBankClientHandler extends Thread{
 					out.println("Log In Failed");
 				}
 			}
-		} catch (IOException e) {
+		} catch (IOException | SQLException e) {
 			e.printStackTrace();
 		}
 		finally {
@@ -95,7 +100,7 @@ public class NewBankClientHandler extends Thread{
 	/**
 	 * Allows the user the choice of logging in or creating a new customer object
 	 */
-	public void startUp() throws IOException {
+	public void startUp() throws IOException, SQLException {
 		try {
 			out.println("Login or Setup New Customer?");
 			String startUpString = in.readLine();
@@ -113,7 +118,7 @@ public class NewBankClientHandler extends Thread{
 	/**
 	 * Creates a customer object
 	 */
-	private void createCustomerOnStartup() throws IOException {
+	private void createCustomerOnStartup() throws IOException, SQLException {
 		boolean creationSuccess = false;
 		try {
 			while (!creationSuccess) {

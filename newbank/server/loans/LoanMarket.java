@@ -5,6 +5,7 @@ import newbank.server.accounts.Account;
 import newbank.server.accounts.AccountID;
 import newbank.server.customers.Customer;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -53,7 +54,7 @@ public class LoanMarket {
         return loanTable;
     }
 
-    public void acceptLoan(Customer customer, Account acc, Integer loanNum){
+    public void acceptLoan(Customer customer, Account acc, Integer loanNum) throws SQLException {
         Loan loan = new Loan(customer.getCustomerId(), acc.getAccountId(), loanMarket.get(loanNum).getAccount(), loanMarket.get(loanNum).getInterestRate(), loanMarket.get(loanNum).getBalance());
 
         LoanVault.getInstance().activeLoans.put(loanNum, loan);

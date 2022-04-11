@@ -5,6 +5,7 @@ import newbank.server.customers.Customer;
 import newbank.server.customers.CustomerID;
 import newbank.server.customers.CustomerManager;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class NewAccount implements Command {
@@ -12,7 +13,7 @@ public class NewAccount implements Command {
     private final CustomerManager theCustomerManager = CustomerManager.getInstance();
     private final AccountManager theAccountManager = AccountManager.getInstance();
 
-    public CommandResponse process(ArrayList<String> argsList) throws CommandException {
+    public CommandResponse process(ArrayList<String> argsList) throws CommandException, SQLException {
 
         if (argsList.size() != 2) {
             String myException = "Invalid arguments, argsList contains: ";
@@ -30,8 +31,8 @@ public class NewAccount implements Command {
             } else if(customer.hasAccount(accountName)) {
                 myResponse = "FAIL";
             } else {
-                myResponse = "SUCCESS";
                 customer.addAccount(theAccountManager.createAccount(customer.getCustomerId(), accountName));
+                myResponse = "SUCCESS";
             }
 
             return new CommandResponse(myResponse);
