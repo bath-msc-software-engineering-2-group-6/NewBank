@@ -1,13 +1,10 @@
-
 A customer enters the command below and sees the messages returned
-
 
 SHOWMYACCOUNTS
 
-Returns a list of all the customers accounts along with their current balance
+Returns a list of all the customers accounts along with their current balance.
 
 e.g. Main: 1000.0
-
 
 
 NEWACCOUNT <Name>
@@ -19,20 +16,18 @@ e.g. NEWACCOUNT Savings
 Returns SUCCESS or FAIL
 
 
-
 MOVEMONEY <Amount> <From> <To>
 
-Move money between the logged in user’s account’s.
+Move money between the user's account’s.
 
 e.g. MOVEMONEY 100 Main Savings
 
 Returns SUCCESS or FAIL
 
 
-
 SENDMONEY <Your Account> <Amount> <Receiver Name> <Receiver Account>
 
-Send money to another user’s account.
+Send money to another users' account.
 
 e.g. SENDMONEY Checking 300 Tristan Checking
 
@@ -68,5 +63,5 @@ Returns SUCCESS or FAIL
 
 LOGOUT
 
-Log’s out the current user
+Log’s out the current user.
 
