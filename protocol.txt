@@ -1,29 +1,72 @@
-This document details the protocol for interacting with the NewBank server.
 
-Dependencies:
-The following need to be added to your Library/Path:
-- JUnit (for testing)
-- Sqlite (database)
-- https://mvnrepository.com/artifact/com.google.zxing/javase/3.3.0 (for password encryption)
-- https://mvnrepository.com/artifact/com.google.zxing/core (for password encryption)
-- https://mvnrepository.com/artifact/commons-codec/commons-codec/1.15 (for the authenticator)
-- https://mvnrepository.com/artifact/de.taimos/totp
+A customer enters the command below and sees the messages returned
 
-
-A customer enters the command below and sees the messages returned 
 
 SHOWMYACCOUNTS
-Returns a list of all the customers accounts along with their current balance 
-e.g. Main: 1000.0 
+
+Returns a list of all the customers accounts along with their current balance
+
+e.g. Main: 1000.0
+
+
 
 NEWACCOUNT <Name>
+
+Creates a new account.
+
 e.g. NEWACCOUNT Savings
+
 Returns SUCCESS or FAIL
 
-MOVE <Amount> <From> <To>
-e.g. MOVE 100 Main Savings 
+
+
+MOVEMONEY <Amount> <From> <To>
+
+Move money between the logged in user’s account’s.
+
+e.g. MOVEMONEY 100 Main Savings
+
 Returns SUCCESS or FAIL
 
-PAY <Person/Company> <Ammount>
-e.g. PAY John 100
+
+
+SENDMONEY <Your Account> <Amount> <Receiver Name> <Receiver Account>
+
+Send money to another user’s account.
+
+e.g. SENDMONEY Checking 300 Tristan Checking
+
 Returns SUCCESS or FAIL
+
+
+PAYIN <Account> < Amount>
+
+Simulates an ATM deposit.
+
+e.g. PAYIN Checking 300
+
+Returns SUCCESS or FAIL
+
+
+2FA
+
+Safety mechanism that requires further authentication for transactions exceeding a certain amount.
+Provides a key and opens a QR code in a new window. Enter the key into Google Authenticator or scan the QR in order to finish the 2FA setup.
+
+e.g. 2FA
+Your key is LYR2VRBGC3POVN5VFXNZTDG3A7IICLOF. Please enter this into Google Authenticator to complete setup. Or use the QR code displayed in the new window.
+
+
+WITHDRAW <Account> <Amount>
+
+Simulates an ATM withdrawal.
+
+e.g. WITHDRAW Checking 250
+
+Returns SUCCESS or FAIL
+
+
+LOGOUT
+
+Log’s out the current user
+
